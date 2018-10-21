@@ -4,7 +4,11 @@ import java.util.LinkedList;
 
 public class InfixExpression {
 
-    public static void infixExpression(String str) {
+    /**
+     * given infix expression with right brackets,
+     * add left brackets
+     */
+    public static void addLeftBrackets(String str) {
         if (str == null || str.length() <= 0) {
             return;
         }
@@ -30,7 +34,7 @@ public class InfixExpression {
     public static void main(String[] args) {
         String str = "1+2)";
         String str2 = "1+2)*3-4)*5-6)))";
-        infixExpression(str);
-        infixExpression(str2);
+        addLeftBrackets(str);
+        addLeftBrackets(str2);
     }
 }

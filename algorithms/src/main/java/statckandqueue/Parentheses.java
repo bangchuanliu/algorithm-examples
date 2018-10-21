@@ -5,7 +5,7 @@ import java.util.LinkedList;
 public class Parentheses {
 
 
-    public static boolean isParenthese(String str) {
+    public static boolean isValidParenthese(String str) {
         if (str == null || str.length() <= 0) {
             return false;
         }
@@ -38,7 +38,7 @@ public class Parentheses {
         String str = "[()]{}{[()()]()}";
         String str2 = "[(])";
 
-        System.out.println(isParenthese(str));
-        System.out.println(isParenthese(str2));
+        System.out.println(isValidParenthese(str));
+        System.out.println(isValidParenthese(str2));
     }
 }

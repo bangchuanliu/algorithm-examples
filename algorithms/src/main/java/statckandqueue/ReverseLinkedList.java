@@ -46,13 +46,13 @@ public class ReverseLinkedList {
 
 
     public static void main(String[] args) {
-        int[] a = {1, 2, 3, 4, 5, 6, 7};
-        ListNode first = ListNodeUtil.createLinkedList(a);
-        ListNodeUtil.printLinkedList(first);
+        Integer[] a = {1, 2, 3, 4, 5, 6, 7};
+        ListNode first = LinkedListUtil.createLinkedList(a);
+        LinkedListUtil.printLinkedList(first);
         ListNode listNode = reverse(first);
-        ListNodeUtil.printLinkedList(listNode);
-        ListNode first2 = ListNodeUtil.createLinkedList(a);
+        LinkedListUtil.printLinkedList(listNode);
+        ListNode first2 = LinkedListUtil.createLinkedList(a);
         ListNode listNode2 = reverse(first2);
-        ListNodeUtil.printLinkedList(listNode2);
+        LinkedListUtil.printLinkedList(listNode2);
     }
 }

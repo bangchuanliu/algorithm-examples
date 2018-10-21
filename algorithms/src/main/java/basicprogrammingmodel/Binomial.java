@@ -2,7 +2,7 @@ package basicprogrammingmodel;
 
 public class Binomial {
 
-    public static double binomial(int n, int k, double p) {
+    public static double binomialRecursive(int n, int k, double p) {
         if (n == 0 && k == 0) {
             return 1;
         }
@@ -10,13 +10,13 @@ public class Binomial {
             return 0;
         }
 
-        return (1.0 - p) * binomial(n - 1, k, p) + p * binomial(n - 1, k - 1, p);
+        return (1.0 - p) * binomialRecursive(n - 1, k, p) + p * binomialRecursive(n - 1, k - 1, p);
     }
 
 
-    public static double binomial2(int n, int k, double p) {
-        double[][] a = new double[n+1][k+1];
-        for (int i = 0; i <=n; i++) {
+    public static double binomialDp(int n, int k, double p) {
+        double[][] a = new double[n + 1][k + 1];
+        for (int i = 0; i <= n; i++) {
             a[i][0] = Math.pow((1.0 - p), i);
         }
 
@@ -31,7 +31,7 @@ public class Binomial {
     }
 
     public static void main(String[] args) {
-        System.out.println(binomial(100, 50, 0.5));
-        System.out.println(binomial2(100, 50, 0.5));
+        System.out.println(binomialRecursive(100, 50, 0.5));
+        System.out.println(binomialDp(100, 50, 0.5));
     }
 }

@@ -2,7 +2,7 @@ package basicprogrammingmodel;
 
 import java.util.Arrays;
 
-public class ArrayFunction {
+public class ArrayUtil {
 
     public int max(int[] a) {
         int max = a[0];
@@ -14,7 +14,6 @@ public class ArrayFunction {
         return max;
     }
 
-
     public double avg(int[] a) {
         double sum = 0.0;
         for (int i = 0; i < a.length; i++) {
@@ -23,8 +22,7 @@ public class ArrayFunction {
         return sum / a.length;
     }
 
-
-    public int[] cp(int[] a) {
+    public int[] copy(int[] a) {
         int[] b = new int[a.length];
         for (int i = 0; i < a.length; i++) {
             b[i] = a[i];
@@ -32,7 +30,6 @@ public class ArrayFunction {
 
         return b;
     }
-
 
     public int[] reverse(int[] a) {
         int N = a.length;
@@ -47,7 +44,7 @@ public class ArrayFunction {
     public double[][] matrixMultiply(int[][] a, int[][] b) {
         int N = b.length;
         double[][] c = new double[N][N];
-        for (int i = 0 ; i < N; i++) {
+        for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
                 for (int k = 0; k < N; k++) {
                     c[i][j] = a[i][k] * b[k][j];
@@ -57,16 +54,21 @@ public class ArrayFunction {
         return c;
     }
 
+    public static <Item> void swap(Item[] a, int i, int j) {
+        Item temp = a[i];
+        a[i] = a[j];
+        a[j] = temp;
+    }
 
     public static void main(String[] args) {
-        ArrayFunction arrayFunction = new ArrayFunction();
+        ArrayUtil arrayUtil = new ArrayUtil();
         int[] a = {1, 2, 3, 4, 5};
-        int[][] c = {{1,2},{1,2}};
-        int[][] d = {{1,2},{1,2}};
-        System.out.println(arrayFunction.max(a));
-        System.out.println(arrayFunction.avg(a));
-        System.out.println(Arrays.toString(arrayFunction.cp(a)));
-        System.out.println(Arrays.toString(arrayFunction.reverse(a)));
-        System.out.println(Arrays.toString(arrayFunction.matrixMultiply(c, d)));
+        int[][] c = {{1, 2}, {1, 2}};
+        int[][] d = {{1, 2}, {1, 2}};
+        System.out.println(arrayUtil.max(a));
+        System.out.println(arrayUtil.avg(a));
+        System.out.println(Arrays.toString(arrayUtil.copy(a)));
+        System.out.println(Arrays.toString(arrayUtil.reverse(a)));
+        System.out.println(Arrays.toString(arrayUtil.matrixMultiply(c, d)));
     }
 }

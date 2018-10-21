@@ -1,6 +1,6 @@
 package basicprogrammingmodel;
 
-public class MathFunction {
+public class MathUtil {
 
 
     public double sqrt(int a, double low, double high) {
@@ -29,8 +29,8 @@ public class MathFunction {
 
 
     public static void main(String[] args) {
-        MathFunction mathFunction = new MathFunction();
-        System.out.println(mathFunction.sqrt(16, 0.0, 16.0));
+        MathUtil mathUtil = new MathUtil();
+        System.out.println(mathUtil.sqrt(16, 0.0, 16.0));
         System.out.println(Math.sqrt((16)));
     }
 }
