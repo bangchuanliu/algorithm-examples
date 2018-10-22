@@ -42,9 +42,8 @@ public class ThreeSum {
         int count = 0;
         Arrays.sort(a);
         for (int i = 0; i < a.length; i++) {
-            int sum = -a[i];
             for (int j = i + 1; j < a.length; j++) {
-                if (BinarySearchUtil.search(a, sum - a[j]) > j) {
+                if (BinarySearchUtil.search(a, -a[i] - a[j]) > j) {
                     count++;
                 }
             }
