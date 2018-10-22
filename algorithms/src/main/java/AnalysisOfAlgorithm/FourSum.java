@@ -48,27 +48,28 @@ public class FourSum {
         Arrays.sort(a);
         for (int i = 0; i < a.length; i++) {
             for (int j = i + 1; j < a.length; j++) {
-                    int l = j + 1;
-                    int h = a.length - 1;
-                    while (l < h) {
-                        if (a[l] + a[h] == -a[i] - a[j]) {
-                            int m = a[l];
-                            int n = a[h];
-                            while (h > l && a[h] == n) {
-                                count++;
-                                h--;
-                            }
-                            while (l+1 < h && a[l+1] == m) {
-                                count++;
-                                l++;
-                            }
-                        } else if (a[l] + a[h] > -a[i] - a[j]) {
+                int l = j + 1;
+                int h = a.length - 1;
+                while (l < h) {
+                    if (a[l] + a[h] == -a[i] - a[j]) {
+                        count++;
+                        l++;
+                        h--;
+                        while (h > l && a[h] == a[h + 1]) {
+                            count++;
                             h--;
-                        } else {
+                        }
+                        while (l < h && a[l] == a[l - 1]) {
+                            count++;
                             l++;
                         }
+                    } else if (a[l] + a[h] > -a[i] - a[j]) {
+                        h--;
+                    } else {
+                        l++;
                     }
                 }
+            }
         }
         System.out.println("count = " + count);
     }

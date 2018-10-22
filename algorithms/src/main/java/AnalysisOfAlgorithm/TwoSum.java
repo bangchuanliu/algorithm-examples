@@ -8,6 +8,17 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * cases:
+ * <p>
+ * Array may have duplicated elements
+ * <p>
+ * 1. find one pair
+ * 2. find count of all pairs
+ * 3. find all unique pairs by value
+ * 4. find all unique paris by array index
+ */
+
 public class TwoSum {
 
     /**
@@ -68,11 +79,13 @@ public class TwoSum {
         while (i < j) {
             if (a[i] + a[j] == 0) {
                 count++;
-                while (j - 1 > i && a[j - 1] == a[j]) {
+                i++;
+                j--;
+                while (i < j && a[j] == a[j + 1]) {
                     count++;
                     j--;
                 }
-                while (i + 1 < j && a[i + 1] == a[i]) {
+                while (i < j && a[i] == a[i - 1]) {
                     count++;
                     i++;
                 }
@@ -86,11 +99,11 @@ public class TwoSum {
     }
 
     public static void main(String[] args) {
-        int[] a = new int[100000];
+        int[] a = new int[10];
         int[] b = new int[10000];
 
         for (int i = 0; i < a.length; i++) {
-            int num = RandomUtil.uniform(-100000, 100000);
+            int num = RandomUtil.uniform(-10, 10);
             a[i] = num;
         }
         for (int i = 0; i < b.length; i++) {
