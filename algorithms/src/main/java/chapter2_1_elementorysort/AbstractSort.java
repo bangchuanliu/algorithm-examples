@@ -1,7 +1,7 @@
 package chapter2_1_elementorysort;
 
 public abstract class AbstractSort {
-    public boolean isSorted(Comparable[] a) {
+    public boolean isAscSorted(Comparable[] a) {
         for (int i = 1; i < a.length; i++) {
             if (less(a[i], a[i-1])) {
                 return false;
