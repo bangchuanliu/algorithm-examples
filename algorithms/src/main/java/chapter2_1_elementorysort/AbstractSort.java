@@ -11,7 +11,7 @@ public abstract class AbstractSort {
     }
 
     public boolean less(Comparable a, Comparable b) {
-        return a.compareTo(b) < 0;
+        return a.compareTo(b) <= 0;
     }
 
     public void show(Comparable[] a) {
