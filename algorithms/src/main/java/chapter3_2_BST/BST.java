@@ -45,15 +45,14 @@ public class BST implements ST {
     }
 
     public Integer select(int k) {
-        
+        return null;
     }
-    
-    public Integer rank(int k){
-        
+
+    public Integer rank(int k) {
+        return null;
     }
-    
-    
-    
+
+
     public Integer floor(int key) {
         Node node = floor(root, key);
         if (node == null) {
@@ -85,16 +84,76 @@ public class BST implements ST {
 
 
     public Integer min() {
-        return min(root);
+        return min(root).key;
     }
 
-    private Integer min(Node node) {
+    private Node min(Node node) {
         if (node.left == null) {
-            return node.key;
+            return node;
         }
         return min(node.left);
     }
 
+
+    private Node deleteMin(Node node) {
+        if (node.left == null) {
+            return node.right;
+        }
+        node.left = deleteMin(node.left);
+        node.N = size(node.left) + size(node.right) + 1;
+        return node;
+    }
+
+    private Node delete(Node node, int key) {
+        if (node == null) {
+            return null;
+        }
+        if (key < node.key) {
+            node.left = delete(node.left, key);
+        } else if (key > node.key) {
+            node.right = delete(node.right, key);
+        } else {
+            if (node.right == null) {
+                return node.left;
+            }
+            if (node.left == null) {
+                return node.right;
+            }
+            Node t = node;
+            node = min(t.right);
+            node.right = deleteMin(t.right);
+            node.left = t.left;
+        }
+        node.N = size(node.left) + size(node.right) + 1;
+        return node;
+    }
+
+
+    private Integer select(Node x, int k) {
+        if (x == null) {
+            return null;
+        }
+        if (k < size(x)) {
+            return select(x.left, k);
+        } else if (k > size(x)) {
+            return select(x.right, k - size(x) - 1);
+        } else {
+            return x.key;
+        }
+    }
+
+    private Integer rank(int key, Node x) {
+        if (x == null) {
+            return 0;
+        }
+        if (key < x.key) {
+            return rank(key, x.left);
+        } else if (key > x.key) {
+            return 1 + size(x.left) + rank(key, x.right);
+        } else {
+            return size(x.left);
+        }
+    }
 
     @Override
     public boolean contains(int key) {
