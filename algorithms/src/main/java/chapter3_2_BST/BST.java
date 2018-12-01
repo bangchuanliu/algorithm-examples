@@ -2,6 +2,8 @@ package chapter3_2_BST;
 
 import chapter3_1_SymbolTable.ST;
 
+import java.util.List;
+
 public class BST implements ST {
     private Node root;
 
@@ -82,6 +84,10 @@ public class BST implements ST {
         }
     }
 
+    /***
+     * order based method and deletion
+     * 
+     */
 
     public Integer min() {
         return min(root).key;
@@ -152,6 +158,22 @@ public class BST implements ST {
             return 1 + size(x.left) + rank(key, x.right);
         } else {
             return size(x.left);
+        }
+    }
+    
+    private void keys(Node node, List list,int low, int high) {
+        if (node == null) {
+            return;
+        }
+        
+        if (node.key > high) {
+            keys(node.left, list, low, high);
+        } else if (node.key < low) {
+            keys(node.right, list, low, high);
+        } else {
+            list.add(node);
+            keys(node.left, list, low, high);
+            keys(node.right, list, low, high);
         }
     }
 
