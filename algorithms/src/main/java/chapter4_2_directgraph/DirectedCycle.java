@@ -1,7 +1,5 @@
 package chapter4_2_directgraph;
 
-import chapter4_1_undirectgraph.Graph;
-
 import java.util.Stack;
 
 public class DirectedCycle {
