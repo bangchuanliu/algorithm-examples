@@ -16,6 +16,9 @@ public class QuickSort {
         sort(a, pivot + 1, high);
     }
 
+    /**
+     * choose last one as pivot
+     **/
     public static int partition(int[] a, int low, int high) {
         int pivot = a[high];
         int i = low;
@@ -30,6 +33,23 @@ public class QuickSort {
         }
         swap(a, i, high);
         return i;
+    }
+
+    /**
+     * choose first one as pivot
+     ***/
+    public static int partition2(int[] a, int low, int high) {
+        int pivot = a[low];
+        int i = low + 1;
+
+        for (int j = low + 1; j <= high; j++) {
+            if (a[j] < pivot) {
+                swap(a, i, j);
+                i++;
+            }
+        }
+        swap(a, i - 1, low);
+        return i - 1;
     }
 
     public static void swap(int[] a, int i, int j) {

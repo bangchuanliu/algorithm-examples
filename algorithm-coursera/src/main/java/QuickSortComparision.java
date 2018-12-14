@@ -26,17 +26,15 @@ public class QuickSortComparision {
     public static int partition1(int[] a, int low, int high) {
         int pivot = a[low];
         int i = low + 1;
-        int j = high;
-        while (i <= j) {
-            if (a[i] < pivot) {
-                i++;
-            } else {
+
+        for (int j = low + 1; j <= high; j++) {
+            if (a[j] < pivot) {
                 swap(a, i, j);
-                j--;
+                i++;
             }
         }
-        swap(a, j, low);
-        return j;
+        swap(a, i - 1, low);
+        return i - 1;
     }
 
 
@@ -44,19 +42,18 @@ public class QuickSortComparision {
      * choose last element as pivot
      */
     public static int partition2(int[] a, int low, int high) {
-        int pivot = a[high];
-        int i = low;
-        int j = high - 1;
-        while (i <= j) {
-            if (a[i] < pivot) {
-                i++;
-            } else {
+        swap(a, low, high);
+        int pivot = a[low];
+        int i = low + 1;
+
+        for (int j = low + 1; j <= high; j++) {
+            if (a[j] < pivot) {
                 swap(a, i, j);
-                j--;
+                i++;
             }
         }
-        swap(a, i, high);
-        return i;
+        swap(a, i - 1, low);
+        return i - 1;
     }
 
     public static void swap(int[] a, int i, int j) {
@@ -70,29 +67,30 @@ public class QuickSortComparision {
      */
     public static int partition3(int[] a, int low, int high) {
         int index = getMedianOfThree(a, low, high);
-        swap(a, index, high);
-        int pivot = a[high];
-        int i = low;
-        int j = high - 1;
-        while (i <= j) {
-            if (a[i] < pivot) {
-                i++;
-            } else {
+        swap(a, index, low);
+        int pivot = a[low];
+        int i = low + 1;
+
+        for (int j = low + 1; j <= high; j++) {
+            if (a[j] < pivot) {
                 swap(a, i, j);
-                j--;
+                i++;
             }
         }
-        swap(a, i, high);
-        return i;
+        swap(a, i - 1, low);
+        return i - 1;
     }
 
     public static int getMedianOfThree(int[] a, int low, int high) {
         int x = a[low];
         int y = a[high];
         int z = a[low + (high - low) / 2];
-        if (x < y && x < z) {
+        int max = Math.max(Math.max(x,y),z);
+        int min = Math.min(Math.min(x,y),z);
+        
+        if (min < x && x < max) {
             return low;
-        } else if (y < x && y < z) {
+        } else if (min < y && y < max) {
             return high;
         } else {
             return low + (high - low) / 2;
@@ -106,6 +104,7 @@ public class QuickSortComparision {
         for (int i = 0; i < nums.length; i++) {
             nums[i] = Integer.parseInt(list.get(i));
         }
+        System.out.println("nums length : " + nums.length);
         long result = sort(nums);
 
         for (int i = 1; i < nums.length; i++) {
