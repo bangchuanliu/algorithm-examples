@@ -1,4 +1,4 @@
-package divideandconquer;
+package dq_sort.assignment1;
 
 import java.math.BigInteger;
 

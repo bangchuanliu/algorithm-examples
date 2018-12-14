@@ -1,4 +1,4 @@
-package divideandconquer;
+package dq_sort;
 
 public class GradeSchoolMultiply {
 
