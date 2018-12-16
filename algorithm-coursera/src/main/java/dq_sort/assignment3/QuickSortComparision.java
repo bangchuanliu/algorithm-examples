@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 public class QuickSortComparision {
@@ -26,6 +27,25 @@ public class QuickSortComparision {
      * choose first element as pivot
      */
     public static int partition1(int[] a, int low, int high) {
+        int pivot = a[low];
+        int i = low + 1;
+
+        for (int j = low + 1; j <= high; j++) {
+            if (a[j] < pivot) {
+                swap(a, i, j);
+                i++;
+            }
+        }
+        swap(a, i - 1, low);
+        return i - 1;
+    }
+
+    /**
+     * choose random element as pivot
+     */
+    public static int partition4(int[] a, int low, int high) {
+        int index = low + new Random().nextInt(high - low);
+        swap(a, low, index);
         int pivot = a[low];
         int i = low + 1;
 
@@ -98,6 +118,8 @@ public class QuickSortComparision {
             return low + (high - low) / 2;
         }
     }
+    
+    
 
     public static void main(String[] args) throws IOException {
         String path = "/Users/b0l00ev/Documents/personal/data/QuickSort.txt";
