@@ -26,7 +26,7 @@ public class CostEdgeGraph {
         edges.addFirst(edge);
     }
 
-    class EdgeNode {
+    public class EdgeNode {
         private int s;
         private int t;
         private int cost;
