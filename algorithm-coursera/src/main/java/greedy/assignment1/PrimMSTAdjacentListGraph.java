@@ -19,14 +19,14 @@ public class PrimMSTAdjacentListGraph {
             int minCost = Integer.MAX_VALUE;
             for (Integer u : vertices) {
                 for (CostAdjacentListGraph.VertexNode vertexNode : graph.getAdj(u)) {
-                    if (!vertices.contains(vertexNode.v) && vertexNode.cost <= minCost) {
+                    if (!vertices.contains(vertexNode.w) && vertexNode.cost <= minCost) {
                         node = vertexNode;
                         minCost = vertexNode.cost;
                     }
                 }
             }
             if (node != null) {
-                vertices.add(node.v);
+                vertices.add(node.w);
                 minSum += minCost;
             }
         }

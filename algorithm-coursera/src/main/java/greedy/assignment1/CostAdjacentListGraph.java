@@ -24,17 +24,19 @@ public class CostAdjacentListGraph {
     }
 
     public void addEdge(int v, int w, int cost) {
-        VertexNode vertexNode = new VertexNode(w, cost);
-        adj[v].addFirst(vertexNode);
+        VertexNode vertexNode1 = new VertexNode(w, cost);
+        VertexNode vertexNode2 = new VertexNode(v, cost);
+        adj[v].addFirst(vertexNode1);
+        adj[w].addFirst(vertexNode2);
         E++;
     }
 
     class VertexNode {
-        int v;
+        int w;
         int cost;
 
-        VertexNode(int v, int cost) {
-            this.v = v;
+        VertexNode(int w, int cost) {
+            this.w = w;
             this.cost = cost;
         }
     }
