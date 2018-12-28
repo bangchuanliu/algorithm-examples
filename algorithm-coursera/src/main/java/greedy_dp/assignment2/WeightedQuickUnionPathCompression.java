@@ -1,4 +1,4 @@
-package greedy.assignment2;
+package greedy_dp.assignment2;
 
 public class WeightedQuickUnionPathCompression {
     private int[] id;

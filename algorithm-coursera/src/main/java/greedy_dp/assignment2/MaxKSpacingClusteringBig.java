@@ -1,4 +1,4 @@
-package greedy.assignment2;
+package greedy_dp.assignment2;
 
 import java.io.IOException;
 import java.nio.file.Files;

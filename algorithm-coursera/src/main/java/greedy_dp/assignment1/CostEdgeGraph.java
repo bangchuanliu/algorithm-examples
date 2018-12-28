@@ -1,4 +1,4 @@
-package greedy.assignment1;
+package greedy_dp.assignment1;
 
 import java.util.LinkedList;
 import java.util.List;

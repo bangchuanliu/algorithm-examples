@@ -1,6 +1,6 @@
-package greedy.assignment2;
+package greedy_dp.assignment2;
 
-import greedy.assignment1.CostEdgeGraph;
+import greedy_dp.assignment1.CostEdgeGraph;
 
 import java.io.IOException;
 import java.nio.file.Files;

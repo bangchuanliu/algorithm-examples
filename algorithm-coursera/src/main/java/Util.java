@@ -14,5 +14,7 @@ public class Util {
         System.out.println(bitSet1.cardinality());
         System.out.println(bitSet1);
         System.out.println(bitSet1.equals(bitSet2));
+        
+        System.out.println(Integer.MAX_VALUE);
     }
 }
