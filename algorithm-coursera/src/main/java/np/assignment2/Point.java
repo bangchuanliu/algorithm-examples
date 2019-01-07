@@ -12,4 +12,8 @@ public class Point {
     public double dist (Point p) {
         return Math.sqrt((x - p.x) * (x - p.x) + (y - p.y) * (y - p.y));
     }
+    
+    public double distSquare(Point p) {
+        return (x - p.x) * (x - p.x) + (y - p.y) * (y - p.y);
+    }
 }
