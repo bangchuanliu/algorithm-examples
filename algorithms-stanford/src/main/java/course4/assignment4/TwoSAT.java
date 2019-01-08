@@ -24,22 +24,22 @@ public class TwoSAT {
 
     public static void main(String[] args) throws IOException {
         //101100
-        String path = "/Users/b0l00ev/Documents/personal/data/2sat1.txt";
-        String path2 = "/Users/b0l00ev/Documents/personal/data/2sat2.txt";
-        String path3 = "/Users/b0l00ev/Documents/personal/data/2sat3.txt";
-        String path4 = "/Users/b0l00ev/Documents/personal/data/2sat4.txt";
-        String path5 = "/Users/b0l00ev/Documents/personal/data/2sat5.txt";
-        String path6 = "/Users/b0l00ev/Documents/personal/data/2sat6.txt";
-        run(path);
-        run(path2);
-        run(path3);
-        run(path4);
-        run(path5);
-        run(path6);
+        String path = TwoSAT.class.getClassLoader().getResource("course4/assignment4/data/2sat1.txt").getPath();
+        String path2 = TwoSAT.class.getClassLoader().getResource("course4/assignment4/data/2sat2.txt").getPath();
+        String path3 = TwoSAT.class.getClassLoader().getResource("course4/assignment4/data/2sat3.txt").getPath();
+        String path4 = TwoSAT.class.getClassLoader().getResource("course4/assignment4/data/2sat4.txt").getPath();
+        String path5 = TwoSAT.class.getClassLoader().getResource("course4/assignment4/data/2sat5.txt").getPath();
+        String path6 = TwoSAT.class.getClassLoader().getResource("course4/assignment4/data/2sat6.txt").getPath();
+        System.out.print(run(path));
+        System.out.print(run(path2));
+        System.out.print(run(path3));
+        System.out.print(run(path4));
+        System.out.print(run(path5));
+        System.out.print(run(path6));
     }
 
 
-    public static void run(String path) throws IOException {
+    public static String run(String path) throws IOException {
         List<String> list = Files.lines(Paths.get(path)).filter(str -> str.length() > 0).collect(Collectors.toList());
         int vertices = Integer.parseInt(list.get(0));
         DiGraph graph = new DiGraph(vertices * 2);
@@ -61,6 +61,6 @@ public class TwoSAT {
                 graph.addEdge(-v, -u + vertices);
             }
         }
-        System.out.println(isSatisfy(graph, vertices));
+        return isSatisfy(graph, vertices) ? "1" : "0";
     }
 }

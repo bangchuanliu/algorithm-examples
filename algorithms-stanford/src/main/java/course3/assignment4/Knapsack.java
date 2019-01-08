@@ -24,8 +24,8 @@ public class Knapsack {
     }
 
     public static void main(String[] args) throws IOException {
-        String path = "/Users/b0l00ev/Documents/personal/data/knapsack1.txt";
-//        String path = "/Users/b0l00ev/Documents/personal/data/test";
+        // 2493893
+        String path = Knapsack.class.getClassLoader().getResource("course3/assignment4/data/knapsack1.txt").getPath();
         List<String> list = Files.lines(Paths.get(path)).filter(str -> str.length() > 0).collect(Collectors.toList());
         int knapsackSize = Integer.parseInt(list.get(0).split("\\s+")[0]);
         int items = Integer.parseInt(list.get(0).split("\\s+")[1]);

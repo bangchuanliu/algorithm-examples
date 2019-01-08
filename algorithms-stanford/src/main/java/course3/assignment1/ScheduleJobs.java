@@ -21,30 +21,12 @@ public class ScheduleJobs {
     }
 
     public static PriorityQueue<JobNode> maxHeapByRatio () {
-        PriorityQueue<JobNode> maxHeap = new PriorityQueue<>(new Comparator<JobNode>() {
-            @Override
-            public int compare(JobNode o1, JobNode o2) {
-                return o2.weight * o1.length - o1.weight * o2.length;
-            }
-        });
-
+        PriorityQueue<JobNode> maxHeap = new PriorityQueue<>((o1, o2) -> o2.weight * o1.length - o1.weight * o2.length);
         return maxHeap;
     }
     
-    public static PriorityQueue<JobNode> maxHeap () {
-        PriorityQueue<JobNode> maxHeap = new PriorityQueue<>(new Comparator<JobNode>() {
-            @Override
-            public int compare(JobNode o1, JobNode o2) {
-                int diff2 = o2.weight - o2.length;
-                int diff1 = o1.weight - o1.length;
-                if (diff2 == diff1) {
-                    return o2.weight - o1.weight;
-                } else {
-                    return diff2 - diff1;
-                }
-            }
-        });
-        
+    public static PriorityQueue<JobNode> maxHeapByDiff () {
+        PriorityQueue<JobNode> maxHeap = new PriorityQueue<>((o1, o2) -> o2.weight - o2.length == o1.weight - o1.length ? o2.weight - o1.weight : o2.weight - o2.length - o1.weight + o1.length);
         return maxHeap;
     }
 
@@ -63,7 +45,7 @@ public class ScheduleJobs {
     }
 
     public static void main(String[] args) throws IOException {
-        String path = "/Users/b0l00ev/Documents/personal/data/jobs.txt";
+        String path = ScheduleJobs.class.getClassLoader().getResource("course3/assignment1/data/jobs.txt").getPath();
         List<String> list = Files.lines(Paths.get(path)).filter(str -> str.length() > 0).collect(Collectors.toList());
         JobNode[] jobs = new JobNode[list.size() - 1];
         for (int i = 0; i < jobs.length; i++) {
@@ -72,7 +54,7 @@ public class ScheduleJobs {
             JobNode jobNode = new JobNode(Integer.parseInt(weightLen[0]), Integer.parseInt(weightLen[1]));
             jobs[i] = jobNode;
         }
-        System.out.println(completeTime(jobs ,maxHeap()));
+        System.out.println(completeTime(jobs ,maxHeapByDiff()));
         System.out.println(completeTime(jobs ,maxHeapByRatio()));
     }
 }

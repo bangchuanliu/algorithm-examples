@@ -10,29 +10,23 @@ import java.util.stream.Collectors;
 
 public class PrimMST {
 
-    public static long minCost(CostEdgeGraph graph) {
-        Set<Integer> vertices = new HashSet<>();
-        CostEdgeGraph.EdgeNode edgeNode = null;
+    public static long minCost(CostEdgeListGraph graph) {
         long minSum = 0;
+        Set<Integer> vertices = new HashSet<>();
         vertices.add(1);  // pick any arbitrary vertex
 
         while (vertices.size() < graph.V()) {
             int minCost = Integer.MAX_VALUE;
-            edgeNode = null;
-            for (CostEdgeGraph.EdgeNode edge : graph.getEdges()) {
-                int s = edge.getS();
-                int t = edge.getT();
-                int cost = edge.getCost();
-                if (isQualifiedEdge(vertices, s, t) && cost <= minCost) {
-                    edgeNode = edge;
-                    minCost = cost;
+            CostEdgeListGraph.Edge minCostEdge = null;
+            for (CostEdgeListGraph.Edge edge : graph.getEdges()) {
+                if (isQualifiedEdge(vertices, edge.u, edge.v) && edge.cost <= minCost) {
+                    minCostEdge = edge;
+                    minCost = edge.cost;
                 }
             }
-            if (edgeNode != null) {
-                vertices.add(edgeNode.getT());
-                vertices.add(edgeNode.getS());
-                minSum += edgeNode.getCost();
-            }
+            vertices.add(minCostEdge.u);
+            vertices.add(minCostEdge.v);
+            minSum += minCost;
         }
         return minSum;
     }
@@ -44,9 +38,9 @@ public class PrimMST {
 
     public static void main(String[] args) throws IOException {
         // -3612829
-        String path = "/Users/b0l00ev/Documents/personal/data/mst_edges.txt";
+        String path = PrimMST.class.getClassLoader().getResource("course3/assignment1/data/mst_edges.txt").getPath();
         List<String> list = Files.lines(Paths.get(path)).filter(str -> str.length() > 0).collect(Collectors.toList());
-        CostEdgeGraph graph = new CostEdgeGraph(Integer.parseInt(list.get(0).split("\\s+")[0]));
+        CostEdgeListGraph graph = new CostEdgeListGraph(Integer.parseInt(list.get(0).split("\\s+")[0]));
 
         for (int i = 1; i < list.size(); i++) {
             String[] line = list.get(i).split("\\s+");

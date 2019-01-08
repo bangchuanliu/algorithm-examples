@@ -60,7 +60,7 @@ public class MaxKSpacingClusteringBig {
 
     public static void main(String[] args) throws IOException {
         //6118
-        String path = "/Users/b0l00ev/Documents/personal/data/clustering_big.txt";
+        String path = MaxKSpacingClusteringBig.class.getClassLoader().getResource("course3/assignment2/data/clustering_big.txt").getPath();
         List<String> list = Files.lines(Paths.get(path)).filter(str -> str.length() > 0).collect(Collectors.toList());
         int vertices = Integer.parseInt(list.get(0).split("\\s+")[0]);
         int len = Integer.parseInt(list.get(0).split("\\s+")[1]);

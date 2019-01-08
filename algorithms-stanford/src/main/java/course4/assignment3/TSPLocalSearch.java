@@ -50,8 +50,7 @@ public class TSPLocalSearch {
 
     public static void main(String[] args) throws IOException {
         // 1203406
-        String path = "/Users/b0l00ev/Documents/personal/data/nn.txt";
-//        String path = "/Users/b0l00ev/Documents/personal/data/test";
+        String path = TSPLocalSearch.class.getClassLoader().getResource("course4/assignment3/data/nn.txt").getPath();
         List<String> list = Files.lines(Paths.get(path)).filter(str -> str.length() > 0).collect(Collectors.toList());
         int vertices = Integer.parseInt(list.get(0));
         Point[] points = new Point[vertices + 1];
