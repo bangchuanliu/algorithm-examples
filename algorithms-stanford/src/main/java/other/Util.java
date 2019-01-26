@@ -1,38 +1,17 @@
 package other;
 
-import course4.assignment2.Point;
-
-import java.math.BigDecimal;
-import java.util.Random;
+import java.util.TreeSet;
 
 public class Util {
     
     public static void main(String[] args) {
-//        BitSet bitSet1 = new BitSet(4);
-//        bitSet1.set(0);
-//        bitSet1.set(2);
-//        BitSet bitSet2 = new BitSet(4);
-//        bitSet2.set(0);
-//        bitSet2.set(2);
-//        System.out.println(bitSet1.length());
-//        System.out.println(bitSet1.size());
-//        System.out.println(bitSet1.cardinality());
-//        System.out.println(bitSet1);
-//        System.out.println(bitSet1.equals(bitSet2));
-//        
-//        System.out.println(Integer.MAX_VALUE);
-
-        Random random  = new Random();
-        for (int i = 1; i <= 10; i++) {
-                
-        }
-        BigDecimal d1 = new BigDecimal(10);
-        BigDecimal d2 = d1.subtract(new BigDecimal((2)));
-        System.out.println(d1);
-        System.out.println(d2);
-
-        Point p1 = new Point(24166.6667d, 13250.0000);
-        Point p2 = new Point(23883.3333, 14533.3333);
-        System.out.println(p1.dist(p2));
+        TreeSet<Integer> set = new TreeSet<>();
+        set.add(3);
+        set.add(5);
+        set.add(9);
+        set.add(7);
+        System.out.println(set);
+        System.out.println(set.higher(2));
+        System.out.println(set.higher(8));
     }
 }
