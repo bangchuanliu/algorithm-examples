@@ -19,10 +19,6 @@ public class CourseScheduleII {
 	 */
 	public int[] findOrder(int numCourses, int[][] prerequisites) {
 
-		if (numCourses <= 0 || prerequisites == null) {
-			return new int[0];
-		}
-
 		Queue<Integer> courses = new LinkedList<>();
 		int[] degrees = new int[numCourses];
 

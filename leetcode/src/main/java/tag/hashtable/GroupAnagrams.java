@@ -1,4 +1,4 @@
-package tag.hash;
+package tag.hashtable;
 
 import java.util.ArrayList;
 import java.util.Arrays;

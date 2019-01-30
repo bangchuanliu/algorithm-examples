@@ -19,10 +19,6 @@ public class CourseSchedule {
 	 */
 	public boolean canFinish(int numCourses, int[][] prerequisites) {
 
-		if (numCourses <= 0 || prerequisites == null) {
-			return false;
-		}
-
 		Queue<Integer> courses = new LinkedList<>();
 		int[] degrees = new int[numCourses];
 

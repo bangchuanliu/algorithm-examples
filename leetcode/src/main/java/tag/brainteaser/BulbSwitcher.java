@@ -1,4 +1,4 @@
-package tag.arraystring;
+package tag.brainteaser;
 
 /**
  * 
