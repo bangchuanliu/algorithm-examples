@@ -13,9 +13,11 @@ public class Util {
         System.out.println(set);
         System.out.println(set.higher(2));
         System.out.println(set.higher(8));
-        System.out.println(true ^ true);
+        System.out.println(set.headSet(5));
+        System.out.println(set.tailSet(5));
         
-        System.out.println(Math.sqrt(1000));
-        System.out.println(Math.floor(Math.sqrt(1000)));
+//        System.out.println(Math.sqrt(1000));
+//        System.out.println(Math.floor(Math.sqrt(1000)));
+        
     }
 }

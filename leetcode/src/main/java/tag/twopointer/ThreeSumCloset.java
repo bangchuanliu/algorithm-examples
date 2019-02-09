@@ -17,18 +17,18 @@ import java.util.Arrays;
  */
 public class ThreeSumCloset {
 
-	public int threeSumClosest(int[] num, int target) {
-		if (num == null || num.length == 0) {
+	public int threeSumClosest(int[] nums, int target) {
+		if (nums == null || nums.length == 0) {
 			return Integer.MIN_VALUE;
 		}
 		int min = Integer.MAX_VALUE;
 		int ret = Integer.MIN_VALUE;
-		Arrays.sort(num);
-		for (int i = 0; i < num.length - 2; i++) {
+		Arrays.sort(nums);
+		for (int i = 0; i < nums.length - 2; i++) {
 			int start = i + 1;
-			int end = num.length - 1;
+			int end = nums.length - 1;
 			while (start < end) {
-				int sum = num[start] + num[end] + num[i];
+				int sum = nums[start] + nums[end] + nums[i];
 				int diff = Math.abs(sum - target);
 				if (diff == 0) {
 					return target;

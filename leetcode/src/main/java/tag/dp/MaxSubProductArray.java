@@ -14,9 +14,7 @@ package tag.dp;
 public class MaxSubProductArray {
 	
 	public int maxProduct(int[] A) {
-		if (A == null || A.length == 0) {
-			return 0;
-		}
+		
 		int max = A[0];
 		int min = A[0];
 		int global = A[0];
