@@ -6,10 +6,6 @@ package tag.dp;
  */
 public class UniquePaths {
 	public int uniquePaths(int m, int n) {
-		if (m <= 0 || n <=0 ) {
-			return 0;
-		}
-		
 		int[][] result = new int[m][n];
 		
 		for (int i = 0; i < m; i++) {
@@ -29,9 +25,19 @@ public class UniquePaths {
 		return result[m-1][n-1];
 	}
 
+	/**
+	 * recursive
+	 */
+	public int uniquePaths2(int m, int n) {
+		if (m == 1 || n == 1) {
+			return 1;
+		}
+		return uniquePaths2(m-1,n) + uniquePaths(m,n-1);
+	}
+
 	
 	public static void main(String[] args) {
 		UniquePaths instance = new UniquePaths();
-		System.out.println(instance.uniquePaths(3, 3));
+		System.out.println(instance.uniquePaths2(7, 3));
 	}
 }

@@ -11,12 +11,10 @@ import common.TreeNode;
 public class UniqueBinarySearchTreesII {
 
 	public List<TreeNode> generateTrees(int n) {
-
 		return constructTree(1, n);
 	}
 
 	public List<TreeNode> constructTree(int start, int end) {
-		
 		List<TreeNode> result = new ArrayList<>();
 		
 		if (start > end) {

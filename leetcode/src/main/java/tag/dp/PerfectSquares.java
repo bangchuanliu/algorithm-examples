@@ -8,11 +8,13 @@ public class PerfectSquares {
 		if (n <= 0) {
 			return 0;
 		}
+		
+		int sqrt = (int)Math.sqrt(n);
 
 		int[] result = new int[n + 1];
 		Arrays.fill(result, Integer.MAX_VALUE);
 
-		for (int i = 1; i * i <= n; i++) {
+		for (int i = 1; i <= sqrt; i++) {
 			result[i * i] = 1;
 		}
 
@@ -24,4 +26,5 @@ public class PerfectSquares {
 
 		return result[n];
 	}
+	
 }

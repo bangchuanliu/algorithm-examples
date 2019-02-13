@@ -7,12 +7,11 @@ package tag.dp;
  * 
  * @author BangChuan Liu
  * @date 2015
- * @Contact liubangchuan1100@gmail.com
  */
 public class LongestPalindromicSubstring {
 	
 	//simple solution
-	public String longestPalindrome2(String s) {
+	public String longestPalindrome(String s) {
 		if (s == null || s.trim().length() <= 1) {
 			return s;
 		}
@@ -43,10 +42,10 @@ public class LongestPalindromicSubstring {
 	
 	public static void main(String[] args) {
 		LongestPalindromicSubstring instance = new LongestPalindromicSubstring();
-		System.out.println(instance.longestPalindrome2("aabaa"));
-		System.out.println(instance.longestPalindrome2("aacdefg"));
-		System.out.println(instance.longestPalindrome2("acdefgg"));
-		System.out.println(instance.longestPalindrome2("acdedfghijk"));
-		System.out.println(instance.longestPalindrome2("acdefghijik"));
+		System.out.println(instance.longestPalindrome("aabaa"));
+		System.out.println(instance.longestPalindrome("aacdefg"));
+		System.out.println(instance.longestPalindrome("acdefgg"));
+		System.out.println(instance.longestPalindrome("acdedfghijk"));
+		System.out.println(instance.longestPalindrome("acdefghijik"));
 	}
 }

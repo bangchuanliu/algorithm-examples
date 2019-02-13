@@ -5,45 +5,11 @@ import java.util.Arrays;
 public class SortColors {
 
 	/**
-	 * Counting sort
-	 * 
-	 * @param nums
-	 */
-	public void sortColors(int[] nums) {
-
-		if (nums == null || nums.length == 0) {
-			return;
-		}
-
-		int[] index = new int[3];
-
-		for (int num : nums) {
-			index[num]++;
-		}
-
-		for (int i = 0; i < nums.length; i++) {
-			if (index[0] > 0) {
-				nums[i] = 0;
-				index[0]--;
-				continue;
-			}
-
-			if (index[1] > 0) {
-				nums[i] = 1;
-				index[1]--;
-				continue;
-			}
-			nums[i] = 2;
-		}
-
-	}
-
-	/**
 	 * two pointers sort
 	 * 
 	 * @param nums
 	 */
-	public void sortColors2(int[] nums) {
+	public void sortColors(int[] nums) {
 		if (nums == null || nums.length == 0) {
 			return;
 		}
@@ -74,8 +40,8 @@ public class SortColors {
 
 	public static void main(String[] args) {
 		SortColors instance = new SortColors();
-		int[] nums = {1,0};
-		instance.sortColors2(nums);
+		int[] nums = {0};
+		instance.sortColors(nums);
 		System.out.println(Arrays.toString(nums));
 	}
 }

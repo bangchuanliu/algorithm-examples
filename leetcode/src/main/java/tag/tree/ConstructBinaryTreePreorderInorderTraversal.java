@@ -14,9 +14,6 @@ import common.TreeNode;
 public class ConstructBinaryTreePreorderInorderTraversal {
 	
 	public TreeNode buildTree(int[] preorder, int[] inorder) {
-		if(inorder == null || preorder == null || preorder.length == 0 || inorder.length == 0){
-			return null;
-		}
 		return buildTree(preorder,0,preorder.length - 1,inorder,0,inorder.length - 1);
 	}
 	
@@ -26,11 +23,8 @@ public class ConstructBinaryTreePreorderInorderTraversal {
 		}
 		int val = preorder[startPre];
 		TreeNode root = new TreeNode(val);
-		int index = 0;
-		while(index <= inorder.length){
-			if(inorder[index] == val){
-				break;
-			}
+		int index = startIn;
+		while(index <= endIn && inorder[index] != val){
 			index++;
 		}
 		TreeNode left = buildTree(preorder,startPre+1,startPre+(index-startIn),inorder,startIn,index-1);

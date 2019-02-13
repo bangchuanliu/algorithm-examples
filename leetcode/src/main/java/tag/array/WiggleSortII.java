@@ -1,4 +1,4 @@
-package tag.string;
+package tag.array;
 
 import java.util.Arrays;
 

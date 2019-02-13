@@ -17,7 +17,6 @@ import java.util.Set;
  * 
  * @author BangChuan Liu
  * @date 2015
- * @Contact liubangchuan1100@gmail.com
  */
 public class WordBreak {
 

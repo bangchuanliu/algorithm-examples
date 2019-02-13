@@ -1,4 +1,4 @@
-package tag.string;
+package tag.array;
 
 import java.util.Arrays;
 
@@ -21,9 +21,7 @@ import java.util.Arrays;
 public class SpiralMatrixII {
 
 	public int[][] generateMatrix(int n) {
-		if (n <= 0) {
-			return new int[0][0];
-		}
+		
 		int[][] matrix = new int[n][n];
 		int x = 0;
 		int y = 0;
