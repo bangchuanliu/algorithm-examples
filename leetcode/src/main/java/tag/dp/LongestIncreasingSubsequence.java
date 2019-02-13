@@ -1,36 +1,33 @@
 package tag.dp;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 public class LongestIncreasingSubsequence {
-	public int lengthOfLIS(int[] nums) {
 
-		if (nums == null || nums.length == 0) {
-			return 0;
-		}
-		List<List<Integer>> lis = new ArrayList<>();
-		List<Integer> subseq = new ArrayList<>();
-		subseq.add(nums[0]);
-		lis.add(subseq);
+    public int lengthOfLIS2(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
 
-		for (int i = 1; i < nums.length; i++) {
-			subseq = new ArrayList<>();
-			for (int j = 0; j < i; j++) {
-				if (nums[i] > nums[j] && (subseq.size() < lis.get(j).size() + 1)) {
-					subseq = new ArrayList<>(lis.get(j));
-				}
-			}
-			subseq.add(nums[i]);
-			lis.add(subseq);
-		}
-				
-		return lis.get(lis.size() - 1).size();
-	}
+        int[] dp = new int[nums.length];
+        Arrays.fill(dp, 1);
+        int max = 1;
+        for (int i = 1; i < nums.length; i++) {
+            for (int j = 0; j < i; j++) {
+                if (nums[j] < nums[i]) {
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
+                    max = Math.max(max, dp[i]);
+                }
+            }
+        }
 
-	public static void main(String[] args) {
-		LongestIncreasingSubsequence instance = new LongestIncreasingSubsequence();
-		int[] nums = {10,9,2,5,3,7,101,18};
-		System.out.println(instance.lengthOfLIS(nums));
-	}
+        return max;
+    }
+
+
+    public static void main(String[] args) {
+        LongestIncreasingSubsequence instance = new LongestIncreasingSubsequence();
+        int[] nums = {1, 3, 6, 7, 9, 4, 10, 5, 6};
+        System.out.println(instance.lengthOfLIS2(nums));
+    }
 }

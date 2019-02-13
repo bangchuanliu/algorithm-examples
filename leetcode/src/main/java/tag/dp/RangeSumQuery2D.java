@@ -22,9 +22,6 @@ public class RangeSumQuery2D {
 	}
 
 	public int sumRegion(int row1, int col1, int row2, int col2) {
-		if (matrix == null || matrix.length == 0) {
-			return 0;
-		}
 		return sums[row2+1][col2+1] + sums[row1][col1] - sums[row2+1][col1] - sums[row1][col2+1];
 	}
 	
