@@ -28,28 +28,6 @@ public class SqrtX {
 
 		return end;
 	}
-
-	public double sqrt(int n) {
-		double ebsilon = 0.001;
-		double left = 1;
-		double right = n;
-		
-		while (left <= right) {
-			double mid = (left + right) / 2;
-			double diff = Math.abs(mid * mid - n);
-			if (diff < ebsilon) {
-				return mid;
-			} else if (mid * mid > n) {
-				right = mid;
-			} else {
-				left = mid;
-			}
-		}
-		
-		return -1.0;
-	}
-	
-	
 	
 	public static void main(String[] args) {
 		SqrtX instance = new SqrtX();

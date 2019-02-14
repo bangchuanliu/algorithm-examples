@@ -15,28 +15,7 @@ package tag.math;
 
 public class AddDigits {
 
-	/**
-	 * naive solution
-	 * 
-	 * @param num
-	 * @return
-	 */
 	public int addDigits(int num) {
-		if (num <= 0) {
-			return 0;
-		}
-		while (num > 9) {
-			char[] chs = String.valueOf(num).toCharArray();
-			int temp = 0;
-			for (char ch : chs) {
-				temp += ch - '0';
-			}
-			num = temp;
-		}
-		return num;
-	}
-
-	public int addDigits3(int num) {
 		if (num < 10) {
 			return num;
 		}

@@ -7,45 +7,6 @@ package tag.dp;
 public class HouseRobberII {
 
 	public int rob(int[] nums) {
-
-		if (nums == null || nums.length == 0) {
-			return 0;
-		}
-
-		int n = nums.length;
-
-		if (n == 1) {
-			return nums[0];
-		}
-
-		if (n == 2) {
-			return Math.max(nums[0], nums[1]);
-		}
-
-		int[] result = new int[n];
-		result[0] = 0;
-		result[1] = nums[0];
-
-		for (int i = 2; i < n; i++) {
-			result[i] = Math.max(result[i - 1], result[i - 2] + nums[i - 1]);
-		}
-
-		int[] result2 = new int[n];
-		result2[0] = 0;
-		result2[1] = nums[1];
-
-		for (int i = 2; i < n; i++) {
-			result2[i] = Math.max(result2[i - 1], result2[i - 2] + nums[i]);
-		}
-
-		return Math.max(result[n - 1], result2[n - 1]);
-	}
-
-	public int rob2(int[] nums) {
-		if (nums == null || nums.length == 0) {
-			return 0;
-		}
-
 		if (nums.length == 1) {
 			return nums[0];
 		}

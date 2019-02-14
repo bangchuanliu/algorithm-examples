@@ -4,10 +4,6 @@ public class MultiplyStrings {
 
 	public String multiply(String num1, String num2) {
 
-		if (num1 == null || num2 == null) {
-			return "";
-		}
-
 		int[] result = new int[num1.length() + num2.length() - 1];
 
 		for (int i = 0; i < num1.length(); i++) {

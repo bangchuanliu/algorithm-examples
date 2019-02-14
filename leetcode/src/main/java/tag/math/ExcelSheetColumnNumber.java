@@ -17,10 +17,6 @@ package tag.math;
 public class ExcelSheetColumnNumber {
 
 	public static int titleToNumber(String s) {
-		if (s == null || s == "") {
-			return 0;
-		}
-
 		int sum = 0;
 
 		for (int i = 0; i < s.length(); i++) {

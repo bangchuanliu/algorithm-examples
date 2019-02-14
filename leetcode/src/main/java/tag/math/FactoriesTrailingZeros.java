@@ -3,24 +3,6 @@ package tag.math;
 public class FactoriesTrailingZeros {
 
 	/**
-	 * a little optimize
-	 * @param n
-	 * @return
-	 */
-	public static int trailingZeroes2(int n) {
-		if (n <= 0) {
-			return 0;
-		}
-		int i = 5;
-		int count = 0;
-		while (n / i != 0) {
-			count += n / i;
-			n = n / 5;
-		}
-		return count;
-	}
-
-	/**
 	 * final optimize
 	 * 
 	 * @param n

@@ -19,15 +19,14 @@ public class String2Integer {
 	/**
 	 * handle follow cases
 	 * 
-	 * 1. null or empty string 2. white spaces 3. +/- sign 4. calculate real
-	 * value 5. handle min & max
+	 * 1. null or empty string 
+	 * 2. white spaces 
+	 * 3. +/- sign 
+	 * 4. calculate real value 
+     * 5. handle min & max
 	 */
 
 	public int atoi(String str) {
-		if (str == null || str.length() == 0) {
-			return 0;
-		}
-		
 		long num = 0;
 		int left = 0;
 		int right = str.length() - 1;

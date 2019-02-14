@@ -25,24 +25,8 @@ import java.util.Set;
  * @author bliu13 Jan 12, 2016
  */
 public class HappyNumber {
-	public boolean isHappy(int n) {
-		if (n <= 0) {
-			return false;
-		}
-		int m = n;
-		int c = 0;
-		while (m != 1 && c < 10000) {
-			String str = String.valueOf(m);
-			m = 0;
-			for (int i = 0; i < str.length(); i++) {
-				m += (str.charAt(i) - '0') * (str.charAt(i) - '0');
-			}
-			c++;
-		}
-		return c != 10000;
-	}
 
-	public boolean isHappy2(int n) {
+	public boolean isHappy(int n) {
 		if (n <= 0) {
 			return false;
 		}

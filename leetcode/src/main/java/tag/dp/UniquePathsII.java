@@ -3,11 +3,6 @@ package tag.dp;
 public class UniquePathsII {
 
 	public int uniquePathsWithObstacles(int[][] obstacleGrid) {
-
-		if (obstacleGrid == null || obstacleGrid.length == 0) {
-			return 0;
-		}
-
 		int m = obstacleGrid.length;
 		int n = obstacleGrid[0].length;
 

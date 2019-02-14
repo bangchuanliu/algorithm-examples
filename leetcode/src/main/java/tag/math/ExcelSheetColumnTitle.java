@@ -11,10 +11,6 @@ package tag.math;
 public class ExcelSheetColumnTitle {
 
 	public static String convertToTitle(int n) {
-		 if(n <= 0){
-		        throw new IllegalArgumentException("Input is not valid!");
-		    }
-		 
 		    StringBuilder sb = new StringBuilder();
 		 
 		    while(n > 0){
