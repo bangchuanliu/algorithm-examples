@@ -9,9 +9,6 @@ public class MinimumDepthofBinaryTree {
 
 	/**
 	 * DFS
-	 * 
-	 * @param root
-	 * @return
 	 */
 	public int minDepth(TreeNode root) {
 		if (root == null) {
@@ -32,19 +29,11 @@ public class MinimumDepthofBinaryTree {
 
 	/**
 	 * BFS
-	 * 
-	 * @param root
-	 * @return
 	 */
 	public int minDepth2(TreeNode root) {
-
-		if (root == null) {
-			return 0;
-		}
-
-		int hight = 1;
+		int height = 1;
 		Queue<TreeNode> queue = new LinkedList<>();
-		queue.offer(root);
+		queue.add(root);
 
 		while (!queue.isEmpty()) {
 			int size = queue.size();
@@ -52,7 +41,7 @@ public class MinimumDepthofBinaryTree {
 			for (int i = 0; i < size; i++) {
 				TreeNode node = queue.poll();
 				if (node.left == null && node.right == null) {
-					return hight;
+					return height;
 				}
 
 				if (node.left != null) {
@@ -63,9 +52,9 @@ public class MinimumDepthofBinaryTree {
 					queue.offer(node.right);
 				}
 			}
-			hight++;
+            height++;
 		}
-		return hight;
+		return height;
 	}
 
 	public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package tag.string;
+package difficulty.easy;
 
 /**
  * Given a string, determine if it is a palindrome, considering only

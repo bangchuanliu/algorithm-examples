@@ -1,4 +1,4 @@
-package tag.tree;
+package difficulty.medium;
 
 import java.util.Stack;
 

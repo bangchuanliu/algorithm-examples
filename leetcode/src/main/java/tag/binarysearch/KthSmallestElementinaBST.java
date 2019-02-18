@@ -3,6 +3,7 @@ package tag.binarysearch;
 import java.util.LinkedList;
 
 import common.TreeNode;
+import common.TreeNodeUtil;
 
 public class KthSmallestElementinaBST {
 
@@ -80,31 +81,33 @@ public class KthSmallestElementinaBST {
 			return 0;
 		}
 
-		kthSmallestHelper(root, k);
+		helper(root, k);
 
-		return val;
+		return result;
 	}
 
 	private int count;
-	private int val;
-	private boolean isFound;
+	private int result;
 
-	public void kthSmallestHelper(TreeNode node, int k) {
-		if (node == null) {
+	public void helper(TreeNode root, int k) {
+		if (root == null) {
 			return;
 		}
-
-		if (!isFound) {
-			kthSmallestHelper(node.left, k);
-		}
-
-		count++;
-		if (count == k) {
-			val = node.val;
-			isFound = true;
-		}
-		if (!isFound) {
-			kthSmallestHelper(node.right, k);
-		}
+        if (count < k) {
+            helper(root.left, k);
+            count++;
+            if (count == k) {
+                result = root.val;
+                return;
+            }
+            helper(root.right, k);    
+        }
 	}
+	
+	public static void main(String[] args) {
+        KthSmallestElementinaBST instance = new KthSmallestElementinaBST();
+        Integer[] nums = {3,1,4,null,2};
+        TreeNode node = TreeNodeUtil.creatTree(nums);
+        System.out.println(instance.kthSmallest3(node,1));
+	} 
 }

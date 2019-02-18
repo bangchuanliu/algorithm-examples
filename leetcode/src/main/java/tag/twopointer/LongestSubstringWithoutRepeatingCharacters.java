@@ -12,49 +12,7 @@ import java.util.Map;
  */
 public class LongestSubstringWithoutRepeatingCharacters {
 	
-	/**
-	 * Recursive solution
-	 * 
-	 * @param s
-	 * @return
-	 */
 	public int lengthOfLongestSubstring(String s) {
-		 if (s == null || s.length() == 0) {
-	           return 0;
-	       }
-	       
-	       if (s.length() == 1) {
-	           return 1;
-	       }
-	       
-	       int i = 0;
-	       int j = 1;
-	       int maxLen = 0;
-	       
-	       Map<Character,Integer> letterIndexMap = new HashMap<>();
-	       letterIndexMap.put(s.charAt(i), i);
-	       
-	       while (j < s.length()) {
-	           if (letterIndexMap.containsKey(s.charAt(j))) {
-	               maxLen = Math.max(maxLen, j - i);
-	               int cur = letterIndexMap.get(s.charAt(j)) + 1;
-	               for (int k = i; k < cur; k++) {
-	            	   letterIndexMap.remove(s.charAt(k));
-	               }
-	               i = cur;
-	           } 
-	           
-	           letterIndexMap.put(s.charAt(j),j);
-	           j++;
-	       }
-	       maxLen = Math.max(maxLen, j - i);
-	       return maxLen;
-	}
-	
-	public int lengthOfLongestSubstring2(String s) {
-		if(s == null || s.length() == 0){
-			return 0;
-		}
 		boolean[] flag = new boolean[256];
 		int result = 0;
 		int start = 0;

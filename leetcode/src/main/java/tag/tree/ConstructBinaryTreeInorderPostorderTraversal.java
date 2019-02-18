@@ -6,41 +6,38 @@ import common.TreeNode;
 
 /**
  * Given inorder and postorder traversal of a tree, construct the binary tree.
- * 
+ * <p>
  * Note: You may assume that duplicates do not exist in the tree.
- * 
- * @author bangchuanliu
  *
+ * @author bangchuanliu
  */
 public class ConstructBinaryTreeInorderPostorderTraversal {
-	public TreeNode buildTree(int[] inorder, int[] postorder) {
-		if (inorder == null || postorder == null || postorder.length == 0 || inorder.length == 0) {
-			return null;
-		}
-		int val = postorder[postorder.length - 1];
-		TreeNode root = new TreeNode(val);
-		int index = 0;
-		while (index < inorder.length) {
-			if (inorder[index] == val) {
-				break;
-			}
-			index++;
-		}
-		int[] leftInorder = Arrays.copyOfRange(inorder, 0, index);
-		int[] rightInorder = Arrays.copyOfRange(inorder, index + 1, inorder.length);
-		int[] leftPostorder = Arrays.copyOfRange(postorder, 0, index);
-		int[] rightPostorder = Arrays.copyOfRange(postorder, index, postorder.length - 1);
-		TreeNode left = buildTree(leftInorder, leftPostorder);
-		TreeNode right = buildTree(rightInorder, rightPostorder);
-		root.left = left;
-		root.right = right;
-		return root;
-	}
+    public TreeNode buildTree(int[] inorder, int[] postorder) {
+        if (inorder == null || postorder == null || postorder.length == 0 || inorder.length == 0) {
+            return null;
+        }
+        return buildTree(inorder, 0, inorder.length - 1, postorder, 0, postorder.length - 1);
+    }
 
-	public static void main(String[] args) {
-		ConstructBinaryTreeInorderPostorderTraversal instance = new ConstructBinaryTreeInorderPostorderTraversal();
-		int[] inorder = { 1, 2 };
-		int[] postorder = { 2, 1 };
-		TreeNode root = instance.buildTree(inorder, postorder);
-	}
+    public TreeNode buildTree(int[] inorder, int i, int j, int[] postorder, int l, int r) {
+        if (i > j || l > r) {
+            return null;
+        }
+        TreeNode root = new TreeNode(postorder[r]);
+        int k = i;
+        while (k <= j && inorder[k] != postorder[r]) {
+            k++;
+        }
+        root.left = buildTree(inorder, i, k - 1, postorder, l, l + k - i - 1);
+        root.right = buildTree(inorder, k + 1, j, postorder, l + k - i, r - 1);
+        return root;
+    }
+
+    public static void main(String[] args) {
+        ConstructBinaryTreeInorderPostorderTraversal instance = new ConstructBinaryTreeInorderPostorderTraversal();
+        int[] inorder = {3, 2, 1};
+        int[] postorder = {3, 2, 1};
+        TreeNode root = instance.buildTree(inorder, postorder);
+        System.out.println(root.val);
+    }
 }

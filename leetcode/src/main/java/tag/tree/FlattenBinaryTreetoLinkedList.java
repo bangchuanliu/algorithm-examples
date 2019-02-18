@@ -1,36 +1,27 @@
 package tag.tree;
 
-import java.util.Stack;
-
 import common.TreeNode;
 
 public class FlattenBinaryTreetoLinkedList {
-	public void flatten(TreeNode root) {
+
+    public void flatten(TreeNode root) {
         if (root == null) {
             return;
         }
-        
-        Stack<TreeNode> stack = new Stack<>();
-        stack.push(root);
-        TreeNode dummy = new TreeNode(0);
-        TreeNode p = dummy;
-        while (!stack.isEmpty()) {
-            TreeNode node = stack.pop();
-            p.right = node;
-            p = p.right;
-            if (node.right != null) {
-                stack.push(node.right);
-            } 
-            
-            if (node.left != null) {
-                stack.push(node.left);
+
+        if (root.left != null) {
+            TreeNode temp = root.left;
+            while (temp.right != null) {
+                temp = temp.right;
             }
+            temp.right = root.right;
+            root.right = root.left;
+            root.left = null;
         }
-        
-        dummy = null;
+        flatten(root.right);
     }
-	
-	public static void main(String[] args) {
+
+    public static void main(String[] args) {
 		FlattenBinaryTreetoLinkedList instance = new FlattenBinaryTreetoLinkedList();
 		TreeNode n1 = new TreeNode(1);
 		TreeNode n2 = new TreeNode(2);
@@ -50,5 +41,4 @@ public class FlattenBinaryTreetoLinkedList {
 			n1 = n1.right;
 		}
 	}
-	
 }

@@ -1,6 +1,7 @@
 package tag.backtracking;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -38,22 +39,8 @@ public class GenerateParentheses {
 		}
 	}
 
-	// StringBuilder 
-	public void generateParenthesis(List<String> result, int left, int right, StringBuilder sb) {
-		if (left > right || left < 0 || right < 0) {
-			return;
-		}
-		if (left == 0 && right == 0) {
-			result.add(sb.toString());
-			return;
-		}
-
-		sb.append("(");
-		generateParenthesis(result, left - 1, right, sb);
-		sb.deleteCharAt(sb.length() - 1);
-
-		sb.append(")");
-		generateParenthesis(result, left, right - 1, sb);
-		sb.deleteCharAt(sb.length() - 1);
+	public static void main(String[] args) {
+        GenerateParentheses instane = new GenerateParentheses();
+        System.out.println(Arrays.toString(instane.generateParenthesis(3).toArray()));
 	}
 }

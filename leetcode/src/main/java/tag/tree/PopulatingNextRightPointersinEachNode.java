@@ -1,7 +1,7 @@
 package tag.tree;
 
 public class PopulatingNextRightPointersinEachNode {
-	public void connect(TreeLinkNode root) {
+	public void connect(Node root) {
 
 		if (root == null) {
 			return;
@@ -10,7 +10,7 @@ public class PopulatingNextRightPointersinEachNode {
 		connect(root, null);
 	}
 
-	public void connect(TreeLinkNode node, TreeLinkNode parent) {
+	public void connect(Node node, Node parent) {
 		if (node == null) {
 			return;
 		}
@@ -24,16 +24,22 @@ public class PopulatingNextRightPointersinEachNode {
 		}
 		
 		connect(node.left, node);
-
 		connect(node.right, node);
 	}
 
-	static class TreeLinkNode {
-		int val;
-		TreeLinkNode left, right, next;
+	class Node {
+		public int val;
+		public Node left;
+		public Node right;
+		public Node next;
 
-		TreeLinkNode(int x) {
-			val = x;
+		public Node() {}
+
+		public Node(int _val,Node _left,Node _right,Node _next) {
+			val = _val;
+			left = _left;
+			right = _right;
+			next = _next;
 		}
-	}
+	};
 }

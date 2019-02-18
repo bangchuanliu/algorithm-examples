@@ -1,4 +1,4 @@
-package tag.tree;
+package difficulty.easy;
 
 import common.TreeNode;
 

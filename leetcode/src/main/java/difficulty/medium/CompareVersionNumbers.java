@@ -1,11 +1,7 @@
-package tag.string;
+package difficulty.medium;
 
 public class CompareVersionNumbers {
     public int compareVersion(String version1, String version2) {
-        if (version1 == null || version2 == null) {
-            return 0;
-        }
-        
         String[] versions1 = version1.split("\\.");
         String[] versions2 = version2.split("\\.");
         

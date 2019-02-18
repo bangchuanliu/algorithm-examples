@@ -1,0 +1,12 @@
+第一个题 是个 insert delete randomset 变种, 具体叫做 phone number waitlist 就是要first come first serve 光解释就花了半天时间, 通话质量真的不好, 设计一个class 比如说输入一个 string, 比如’666-55-444’’, 要实现一个 add函数 ,就把它加进去,你可以假设没有重复, 然后实现一个poll() 函数, 把第一个放进去的string poll 出来, 最后还有一个remove函数, remove 当前存的任意一个 string, 举个例子
+add(‘233’)
+add(‘873’)
+add(‘888’)
+remove(‘873’)
+poll(): 输出233
+poll(): 输出888
+add(‘253’)
+然后我只把优化了remove部分优化了, 但是相应的就把poll()给变成O(n)了 不过还是好一些
+第二题 就是 copy tree 设计一个TreeNode, TreeNode直接调用 root.copy() 返回一个tree shallow copy 就可以
+第二题时间不够了 就剩不到10分钟,于是就直接转成list再重建了
+

@@ -1,0 +1,21 @@
+Minimum Vertices to Traverse Directed Graph, alien dictionar
+A同学 cheapest flights， alien dictionary
+B同学 file system， sliding puzzle
+C同学 cheapest flight， pour water
+D同学 pour water， IP to CIDR
+E 同学 pour water， file system
+F同学pour water， bank system
+G同学 alien dictionary， IP to CIDR
+
+
+题目是给你公式，比如偶数的话除2，奇数的话就变成3*n+1，对于任何一个正数，数学猜想是最终他会变成1。每变一步步数加1，给一个上限，让找出范围内最长步数。
+题目是著名的给一个总金额，怎么选开胃菜，感觉就是硬币组合的变形。
+
+
+Palindrome Pairs 面经
+
+给你一个String, 问里面能形成最少palindrome substring的个数。
+For example
+“aaa” -> 最少就是1个 就是aaa
+“aaab” -> 最少就是2个 就是aaa和b
+“abc” -> 最少就是3个 就是 a，b和c
