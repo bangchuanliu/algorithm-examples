@@ -1,8 +1,10 @@
-package tag.graph;
+package tag.bfs;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Set;
 
 
@@ -28,7 +30,8 @@ import java.util.Set;
  * 
  * @author BangChuan Liu 
  * @date   2015
- * @Contact liubangchuan1100@gmail.com
+ * @version 2.0
+ * @since Feb 25, 2019
  */
 public class WordLadder {
 	public int ladderLength(String beginWord, String endWord,
@@ -37,10 +40,13 @@ public class WordLadder {
             return 0;
         }
         
+        Map<String, Boolean> visited = new HashMap<>();
+        Set<String> set = new HashSet<>(wordList);
         LinkedList<String> wordQ = new LinkedList<>();
         LinkedList<Integer> distanceQ = new LinkedList<>();
         wordQ.add(beginWord);
         distanceQ.add(1);
+        visited.put(beginWord, true);
         
         int result = Integer.MAX_VALUE;
         
@@ -60,8 +66,9 @@ public class WordLadder {
                     }
                     words[i] = c;
                     String temp = new String(words);
-                    if (wordList.contains(temp)) {
+                    if (set.contains(temp) && !visited.getOrDefault(temp,false)) {
                         wordQ.add(temp);
+                        visited.put(temp, true);
                         distanceQ.add(dis+1);
                         wordList.remove(temp);
                     }

@@ -8,9 +8,12 @@ public class RotateList {
 		if (head == null || head.next == null || k < 0) {
 			return head;
 		}
-
-		ListNode p1 = head;
-		int i = 0;
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode p1;
+        ListNode p2;
+		
+        p1 = head;
 		int len = 0;
 
 		while (p1 != null) {
@@ -19,28 +22,31 @@ public class RotateList {
 		}
 
 		k = k % len;
-		p1 = head;
-		
-		while (i < k) {
-			p1 = p1.next;
-			i++;
+		p1 = dummy;
+		p2 = dummy;
+		for (int i = 0 ; i < len - k; i++) {
+		    p2 = p2.next;
+        }
+        
+		while (p2 != null && p2.next != null) {
+		    ListNode temp = p2.next;
+            p2.next = p2.next.next;
+            temp.next = p1.next;
+		    p1.next = temp;
+		    p1 = p1.next;
 		}
 
-		ListNode p2 = head;
-
-		while (p1 != null && p1.next != null) {
-			p1 = p1.next;
-			p2 = p2.next;
-		}
-
-		if (p1 != null) {
-			p1.next = head;
-			ListNode newhead = p2.next;
-			p2.next = null;
-			return newhead;
-		}
-
-		return head;
-
+		return dummy.next;
 	}
+	
+	public static void main(String[] args) {
+        ListNode n0 = new ListNode(0);
+        ListNode n1 = new ListNode(1);
+        ListNode n2 = new ListNode(2);
+        n0.next = n1;
+        n1.next = n2;
+
+        RotateList rotateList = new RotateList();
+        ListNode head = rotateList.rotateRight(n0,4);
+    }
 }

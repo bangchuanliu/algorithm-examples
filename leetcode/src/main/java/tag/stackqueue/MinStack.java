@@ -1,11 +1,12 @@
 package tag.stackqueue;
 
-import common.Stack;
+import java.util.Stack;
+
 
 class MinStack {
 	
-	private Stack stack = new Stack();
-	private Stack minStack = new Stack();
+	private Stack<Integer> stack = new Stack();
+	private Stack<Integer> minStack = new Stack();
 	int min = Integer.MAX_VALUE;
 	
     public void push(int x) {
@@ -25,7 +26,7 @@ class MinStack {
     	if(stack.isEmpty() || minStack.isEmpty()){
     		return;
     	}
-    	if(stack.top() == minStack.top()){
+    	if(stack.peek() == minStack.peek()){
     		stack.pop();
     		minStack.pop();
     	}else{
@@ -37,14 +38,14 @@ class MinStack {
     	if(stack.isEmpty()){
     		return 0;
     	}
-        return stack.top();
+        return stack.peek();
     }
 
     public int getMin() {
     	if(minStack.isEmpty()){
     		return 0;
     	}
-        return minStack.top();
+        return minStack.peek();
     }
     
     public static void main(String[] args){

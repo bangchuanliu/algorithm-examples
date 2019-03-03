@@ -3,19 +3,19 @@ package tag.dp;
 public class BestTimetoBuyandSellStockwithTransactionFee {
 
     public int maxProfit(int[] prices, int fee) {
-        int min = prices[0];
-        int sum = 0;
-        int max = 0;
-
-        for (int i = 1; i < prices.length; i++) {
-            if (prices[i] > prices[i-1] + fee) {
-                sum += prices[i] - prices[i-1] - fee;
-                int temp = prices[i] - min - fee;
-                max = Math.max(max, Math.max(sum, temp));
+        int[] dp = new int[prices.length];
+        dp[0] = 0;
+        for (int i = 1; i< prices.length; i++) {
+            int max = 0;
+            for (int j = 0; j < i; j++) {
+                if (prices[j] + fee < prices[i])
+                    max = Math.max(max, prices[i] - prices[j] - fee + dp[j]);
             }
+            max = Math.max(max, dp[i-1]);
+            dp[i] = max;
         }
 
-        return max;
+        return dp[dp.length-1];
     }
 
     public static void main(String[] args) {

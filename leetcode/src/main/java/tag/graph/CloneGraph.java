@@ -19,10 +19,6 @@ public class CloneGraph {
 	 */
 	public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) {
 
-		if (node == null) {
-			return node;
-		}
-
 		LinkedList<UndirectedGraphNode> queue = new LinkedList<>();
 		Map<UndirectedGraphNode, UndirectedGraphNode> maps = new HashMap<>();
 

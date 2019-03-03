@@ -1,6 +1,7 @@
 package common;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 public class TreeNodeUtil {
@@ -42,5 +43,25 @@ public class TreeNodeUtil {
             }
             System.out.println();
         }
+    }
+
+    public static void printTreePreOrder(TreeNode root, List<Integer> result) {
+        if (root == null) {
+            result.add(null);
+            return;
+        }        
+        result.add(root.val);
+        printTreePreOrder(root.left, result);
+        printTreePreOrder(root.right, result);
+    }
+
+    public static void PrintInorder(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        
+        PrintInorder(root.left);
+        System.out.print(root.val + " ");
+        PrintInorder(root.right);
     }
 }

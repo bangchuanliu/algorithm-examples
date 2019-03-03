@@ -7,10 +7,6 @@ package tag.binarysearch;
 public class DivideTwoIntegers {
 
 	public int divide(int dividend, int divisor) {
-		if (divisor == 0) {
-			return Integer.MAX_VALUE;
-		}
-
 		if (divisor == -1 && dividend == Integer.MIN_VALUE) {
 			return Integer.MAX_VALUE;
 		}
@@ -40,8 +36,8 @@ public class DivideTwoIntegers {
 
 	public static void main(String[] args) {
 		DivideTwoIntegers instance = new DivideTwoIntegers();
-		System.out.println(instance.divide(-1010369383, -2147483648));
-		System.out.println((1010369383 / 2147483648L));
+		System.out.println(instance.divide(100, 7));
+//		System.out.println((1010369383 / 2147483648L));
 	}
 
 }

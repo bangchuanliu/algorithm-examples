@@ -45,6 +45,27 @@ public class PalindromePartitioning {
 			}
 		}
 	}
+
+    public List<List<String>> partition2(String s) {
+        List<List<String>> result = new ArrayList<>();
+        if (s.length() == 0) {
+            List<String> temp = new ArrayList<>();
+            result.add(temp);
+            return result;
+        }
+
+        for (int i = 1; i <= s.length(); i++) {
+            if (isPalindrome(s.substring(0,i))) {
+                List<List<String>> templist = partition2(s.substring(i));
+                for (List<String> strs : templist) {
+                    strs.add(0,s.substring(0,i));
+                    result.add(strs);
+                }
+            }
+        }
+
+        return result;
+    }
 	
 	public boolean isPalindrome(String str) {
 		int i = 0;

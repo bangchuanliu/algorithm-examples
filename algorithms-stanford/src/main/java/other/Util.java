@@ -2,57 +2,41 @@ package other;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.BitSet;
+import java.util.HashSet;
 import java.util.List;
-import java.util.TreeSet;
+import java.util.Set;
 
 public class Util {
-    
+
     public static void main(String[] args) {
-        TreeSet<Integer> set = new TreeSet<>();
-        set.add(3);
-        set.add(5);
-        set.add(9);
-        set.add(7);
-//        System.out.println(set);
-//        System.out.println(set.higher(2));
-//        System.out.println(set.higher(8));
-//        System.out.println(set.headSet(5));
-//        System.out.println(set.tailSet(5));
-        
-//        String s = "a.b.c.d";
-//        
-//        System.out.println(s.substring(2,2));
-//        System.out.println(s.split("\\.").length);
-        
-//        System.out.println(Math.sqrt(1000));
-//        System.out.println(Math.floor(Math.sqrt(1000)));
-
-
         Util util = new Util();
-        System.out.println(Arrays.toString(util.restoreIpAddresses("25525511135").toArray()));
+        int[] nums = {1,2,2};
+        System.out.println(Arrays.deepToString(util.subsetsWithDup(nums).toArray()));
+
+
     }
 
-    public List<String> restoreIpAddresses(String s) {
-        List<String> result = new ArrayList<>();
-        restoreIpAddresses(result, s, "");
-
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        subsetsWithDup(result, nums, 0, new ArrayList<>());
         return result;
     }
 
+    public void subsetsWithDup(List<List<Integer>> result, int[] nums, int index, List<Integer> temp) {
+//        if (index > nums.length) {
+//            return;
+//        }
+        result.add(new ArrayList<>(temp));
 
-    public void restoreIpAddresses(List<String> result, String s, String temp) {
-        if (temp.split("\\.").length > 4) {
-            return;
-        }
-        if (s.length() == 0 && temp.split("\\.").length == 4) {
-            result.add(temp.substring(0, temp.length()-1));
-            return;
-        }
+        int last = Integer.MIN_VALUE;
 
-        for (int i = 1; i <= s.length() && i <= 3; i++) {
-            String subs = s.substring(0,i);
-            if (i == 1 || (i > 1 && subs.charAt(0) != '0' && Integer.parseInt(subs) < 256)) {
-                restoreIpAddresses(result, s.substring(i),temp + subs + ".");
+        for (int i = index; i < nums.length; i++) {
+            if (nums[i] != last) {
+                last = nums[i];
+                temp.add(nums[i]);
+                subsetsWithDup(result, nums, i+1,temp);
+                temp.remove(temp.size()-1);
             }
         }
     }
