@@ -1,4 +1,4 @@
-package tag.linkedlist;
+package difficulty.easy;
 
 import common.ListNode;
 

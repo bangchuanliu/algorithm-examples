@@ -1,4 +1,4 @@
-package tag.twopointer;
+package difficulty.easy;
 
 import common.ListNode;
 

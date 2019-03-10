@@ -12,11 +12,6 @@ import java.util.Queue;
 public class MinimumHeightTrees {
 
 	public List<Integer> findMinHeightTrees(int n, int[][] edges) {
-		
-		if (n <= 0) {
-			return new ArrayList<>();
-		}
-		
 		int[] degrees = new int[n];
 		
 		for (int i = 0; i < edges.length; i++) {
@@ -24,41 +19,39 @@ public class MinimumHeightTrees {
 			degrees[edges[i][1]]++;
 		}
 		
-		Queue<Integer> vetexs = new LinkedList<>();
+		Queue<Integer> vertices = new LinkedList<>();
 		List<Integer> rootNodes = new ArrayList<>();
 		
 		for (int i = 0; i < degrees.length; i++) {
 			if (degrees[i] == 1 || degrees[i] == 0) { // if n = 1 degrees[i] = 0
-				vetexs.add(i);
+				vertices.add(i);
 			}
 		}
 		
 		while (n > 2) {
-			
-			int qSize = vetexs.size();
-			
+			int qSize = vertices.size();
 			for (int j = 0; j < qSize; j++) {
-				int vetex = vetexs.poll();
+				int vetex = vertices.poll();
 				n--;
 				
 				for (int i = 0; i < edges.length; i++) {
 					if (edges[i][0] == vetex) {
 						degrees[edges[i][1]]--;
 						if (degrees[edges[i][1]] == 1) {
-							vetexs.offer(edges[i][1]);
+							vertices.offer(edges[i][1]);
 						}
 					} else if (edges[i][1] == vetex){
 						degrees[edges[i][0]]--;
 						if (degrees[edges[i][0]] == 1) {
-							vetexs.offer(edges[i][0]);
+							vertices.offer(edges[i][0]);
 						}
 					}
 				}
 			}
 		}
 		
-		while (!vetexs.isEmpty()) {
-			rootNodes.add(vetexs.poll());
+		while (!vertices.isEmpty()) {
+			rootNodes.add(vertices.poll());
 		}
 		
 		return rootNodes;

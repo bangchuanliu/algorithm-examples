@@ -8,10 +8,6 @@ public class DifferentWaystoAddParentheses {
 	public List<Integer> diffWaysToCompute(String input) {
 		List<Integer> result = new ArrayList<>();
 
-		if (input == null || input.length() == 0) {
-			return result;
-		}
-
 		for (int i = 0; i < input.length(); i++) {
 			if (!Character.isDigit(input.charAt(i))) {
 				List<Integer> numOfWays1 = diffWaysToCompute(input.substring(0, i));

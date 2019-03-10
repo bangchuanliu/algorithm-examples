@@ -22,7 +22,7 @@ public class QuickUnionUF implements UF {
         if (pr == qr) {
             return;
         }
-        ids[p] = qr;
+        ids[pr] = qr;
         count--;
     }
 

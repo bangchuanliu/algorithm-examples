@@ -3,37 +3,8 @@ package tag.linkedlist;
 import common.ListNode;
 
 public class InsertionSortList {
-	public ListNode insertionSortList(ListNode head) {
-		if (head == null || head.next == null) {
-			return head;
-		}
-		ListNode p1 = head;
-		ListNode p2 = p1.next;
-		while (p2 != null) {
-			ListNode p3 = p2.next;
-			ListNode p = head;
-			if (p2.val < p.val) {
-				p2.next = p;
-				p1.next = p3;
-				head = p2;
-				p2 = p3;
-			} else if (p2.val >= p1.val) {
-				p1 = p2;
-				p2 = p3;
-			} else {
-				while (p2.val > p.next.val) {
-					p = p.next;
-				}
-				p2.next = p.next;
-				p.next = p2;
-				p1.next = p3;
-				p2 = p3;
-			}
-		}
-		return head;
-	}
 
-	public ListNode insertionSortList2(ListNode head) {
+	public ListNode insertionSortList(ListNode head) {
 		if (head == null || head.next == null) {
 			return head;
 		}

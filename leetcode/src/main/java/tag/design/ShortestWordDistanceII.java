@@ -1,4 +1,4 @@
-package tag.string;
+package tag.design;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,15 +9,15 @@ public class ShortestWordDistanceII {
 	
 	private Map<String, List<Integer>> wordIndexMap = new HashMap<>();
 	
-	public ShortestWordDistanceII(List<String> words) {
+	public ShortestWordDistanceII(String[] words) {
 		if (words != null) {
-			for (int i = 0; i < words.size(); i++) {
-				if (wordIndexMap.containsKey(words.get(i))) {
-					wordIndexMap.get(words.get(i)).add(i);
+			for (int i = 0; i < words.length; i++) {
+				if (wordIndexMap.containsKey(words[i])) {
+					wordIndexMap.get(words[i]).add(i);
 				} else {
 					List<Integer> indexs = new ArrayList<>();
 					indexs.add(i);
-					wordIndexMap.put(words.get(i), indexs);
+					wordIndexMap.put(words[i], indexs);
 				}
 			}
 		}

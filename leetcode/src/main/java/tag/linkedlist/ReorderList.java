@@ -37,17 +37,15 @@ public class ReorderList {
 		if (head == null || head.next == null) {
 			return head;
 		}
+		ListNode pre = null;
 		ListNode p1 = head;
-		ListNode p2 = head.next;
-		while (p2 != null) {
-			ListNode p3 = p2.next;
-			p2.next = p1;
+		while (p1 != null) {
+			ListNode p2 = p1.next;
+			p1.next = pre;
+			pre = p1;
 			p1 = p2;
-			p2 = p3;
 		}
-		head.next = null;
-		head = p1;
-		return head;
+		return pre;
 	}
 
 	public static void main(String[] args) {

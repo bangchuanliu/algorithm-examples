@@ -8,82 +8,77 @@ import java.util.List;
 import java.util.Set;
 
 /**
- *  Given a string s and a dictionary of words dict, 
- *  add spaces in s to construct a sentence where each word is a valid dictionary word.
-
-	Return all such possible sentences.
-	
-	For example, given
-	s = "catsanddog",
-	dict = ["cat", "cats", "and", "sand", "dog"].
-	
-	A solution is ["cats and dog", "cat sand dog"].
-
- * @author BangChuan Liu 
- * @date   2015
+ * Given a string s and a dictionary of words dict,
+ * add spaces in s to construct a sentence where each word is a valid dictionary word.
+ * <p>
+ * Return all such possible sentences.
+ * <p>
+ * For example, given
+ * s = "catsanddog",
+ * dict = ["cat", "cats", "and", "sand", "dog"].
+ * <p>
+ * A solution is ["cats and dog", "cat sand dog"].
+ *
+ * @author BangChuan Liu
+ * @date 2015
  * @Contact liubangchuan1100@gmail.com
  */
 public class WordBreakII {
 
-	public List<String> wordBreak(String s, Set<String> dict) {
-		List<String> emptyList = new ArrayList<String>();
-		if (s == null || s.trim().length() == 0 || dict == null || dict.size() == 0) {
-			return emptyList;
-		}
-		List<String>[] result = new ArrayList[s.length()+1];
-		result[0] = emptyList;
-		for(int i = 0;i<s.length();i++){
-			if(result[i] == null){
-				continue;
-			}
-			for(String str : dict){
-				int end = str.length() + i;
-				if(end > s.length()){
-					continue;
-				}
-				
-				if(str.equals(s.substring(i, end))){
-					if(result[end] == null){
-						result[end] = new ArrayList<String>();
-					}
-					result[end].add(str);
-				}
-			}
-		}
-		if(result[s.length()] == null){
-			return emptyList;
-		}
-		ArrayList<String> ret =  new ArrayList<String>();
-		dfs(result,s.length(),ret,new ArrayList<String>());
-		Collections.reverse(ret);
-		return ret;
-	}
-	
-	public void dfs(List<String>[] result,int end,List<String> ret, List<String> tmp){
-		if(end <= 0){
-			String path = "";
-			for(String str : tmp){
-				path = str + " " + path;
-			}
-			ret.add(path.trim());
-		}
-		
-		for(String str : result[end]){
-			tmp.add(str);
-			dfs(result,end-str.length(),ret,tmp);
-			tmp.remove(str);
-		}
-	}
-	
-	public static void main(String[] args) {
-		WordBreakII instance = new WordBreakII();
-		String s = "aaaaaaa";
-		String[] strs = {"aaaa", "aa", "a"};
-		Set<String> dict =new HashSet<String>(Arrays.asList(strs));
-		List<String> ret = instance.wordBreak(s, dict);
-		for(String str :  ret){
-			System.out.println(str);
-		}
-		
-	}
+    public List<String> wordBreak(String s, List<String> wordDict) {
+        List<String> result = new ArrayList<String>();
+        dfs(wordDict, result, "", s);
+        return result;
+    }
+
+
+    public List<String> dp(String s, List<String> wordDict) {
+        List<String>[] dp = new List[s.length() + 1];
+        List<String> initial = new ArrayList<>();
+        initial.add("");
+        dp[0] = initial;
+
+        for (int i = 0; i < s.length(); i++) {
+            for (String str : wordDict) {
+                int len = str.length();
+                if (i + len <= s.length() && str.equals(s.substring(i, i + len))) {
+                    List<String> temp = dp[i];
+                    List<String> list = dp[i + len] == null ? new ArrayList<>() : dp[i+len];
+                    if (temp != null && !temp.isEmpty()) {
+                        for (String st : temp) {
+                            list.add(st + " " + str);
+                        }
+                    }
+                    dp[i + len] = list;
+                }
+            }
+        }
+
+        return dp[s.length()];
+    }
+
+    /**
+     * backtracking
+     */
+    public void dfs(List<String> wordDict, List<String> ret, String tmp, String s) {
+        if (s.isEmpty()) {
+            ret.add(tmp.trim());
+            return;
+        }
+        for (String str : wordDict) {
+            if (str.length() <= s.length() && str.equals(s.substring(0, str.length()))) {
+                dfs(wordDict, ret, tmp + " " + str, s.substring(str.length()));
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        WordBreakII instance = new WordBreakII();
+        String s = "pineapplepenapple";
+        String[] strs = {"apple", "pen", "applepen", "pine", "pineapple"};
+        List<String> dict = new ArrayList<>(Arrays.asList(strs));
+        List<String> ret = instance.dp(s, dict);
+        System.out.println(Arrays.toString(ret.toArray()));
+
+    }
 }

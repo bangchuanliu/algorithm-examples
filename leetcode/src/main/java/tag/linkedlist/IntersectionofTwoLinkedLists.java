@@ -29,39 +29,24 @@ Your code should preferably run in O(n) time and use only O(1) memory.
 public class IntersectionofTwoLinkedLists {
 
 	public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-		if (headA == null || headB == null) {
-			return null;
-		}
-		ListNode p1 = headA;
-		ListNode p2 = headB;
-		int len1 = 0;
-		int len2 = 0;
-		while (p1 != null) {
-			p1 = p1.next;
-			len1++;
-		}
-		while (p2 != null) {
-			p2 = p2.next;
-			len2++;
-		}
-		p1 = headA;
-		p2 = headB;
-		if (len1 > len2) {
-			while (len2 < len1) {
-				p1 = p1.next;
-				len2++;
-			}
-		} else if (len1 < len2) {
-			while (len1 < len2) {
-				p2 = p2.next;
-				len1++;
-			}
-		}
-		while (p1 != null && p2 != null && p1 != p2) {
-			p1 = p1.next;
-			p2 = p2.next;
-		}
-		return p1;
+        ListNode pa = headA;
+        ListNode pb = headB;
+
+
+        while (pa != pb) {
+            if (pa == null) {
+                pa = headB;
+            }else {
+                pa = pa.next;
+            }
+            if (pb == null) {
+                pb = headA;
+            }else {
+                pb = pb.next;
+            }
+        }
+
+        return pa;
 	}
 }
 

@@ -1,87 +1,68 @@
 package tag.graph;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 
 /**
- * 
  * @author bliu13 Dec 27, 2015
  */
 public class CloneGraph {
 
-	/**
-	 * BFS
-	 * 
-	 * @param node
-	 * @return
-	 */
-	public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) {
+    /**
+     * BFS
+     */
+    public Node cloneGraph(Node node) {
 
-		LinkedList<UndirectedGraphNode> queue = new LinkedList<>();
-		Map<UndirectedGraphNode, UndirectedGraphNode> maps = new HashMap<>();
+        Queue<Node> queue = new LinkedList<>();
+        Map<Node, Node> maps = new HashMap<>();
 
-		UndirectedGraphNode newHead = new UndirectedGraphNode(node.label);
+        Node newHead = new Node(node.val, new ArrayList<>());
 
-		maps.put(node, newHead);
-		queue.add(node);
+        maps.put(node, newHead);
+        queue.add(node);
 
-		while (!queue.isEmpty()) {
-			UndirectedGraphNode currNode = queue.poll();
-			List<UndirectedGraphNode> currNeighbors = currNode.neighbors;
+        while (!queue.isEmpty()) {
+            Node currNode = queue.poll();
+            for (Node neighbor : currNode.neighbors) {
+                if (!maps.containsKey(neighbor)) {
+                    Node clonedNode = new Node(neighbor.val, new ArrayList<>());
+                    maps.put(neighbor, clonedNode);
+                    maps.get(currNode).neighbors.add(clonedNode);
+                    queue.add(neighbor);
+                } else {
+                    maps.get(currNode).neighbors.add(maps.get(neighbor));
+                }
+            }
+        }
 
-			for (UndirectedGraphNode n : currNeighbors) {
-				if (!maps.containsKey(n)) {
-					UndirectedGraphNode clonedNode = new UndirectedGraphNode(
-							n.label);
-					maps.put(n, clonedNode);
-					maps.get(currNode).neighbors.add(clonedNode);
-					queue.add(n);
-				} else {
-					maps.get(currNode).neighbors.add(maps.get(n));
-				}
-			}
-		}
+        return newHead;
+    }
 
-		return newHead;
-	}
-	
-	
-	/**
-	 * DFS
-	 * 
-	 * @param node
-	 * @return
-	 */
-	public UndirectedGraphNode cloneGraphDFS(UndirectedGraphNode node) {
 
-		if (node == null) {
-			return node;
-		}
+    /**
+     * DFS
+     */
+    public Node cloneGraphDFS(Node node) {
+        return cloneGraphDFS(node, new HashMap<>());
+    }
 
-		UndirectedGraphNode newHead = new UndirectedGraphNode(node.label);
-		Map<UndirectedGraphNode,UndirectedGraphNode> maps = new HashMap<>();
-		
-		maps.put(node, newHead);
-		
-		cloneGraphDFS(node,maps);
-		
-		return newHead;
-	}
-	
-	public void cloneGraphDFS(UndirectedGraphNode node, Map<UndirectedGraphNode,UndirectedGraphNode> maps) {
-		for (UndirectedGraphNode curr : node.neighbors) {
-			if (!maps.containsKey(curr)) {
-				UndirectedGraphNode clonedNode = new UndirectedGraphNode(curr.label);
-				maps.put(curr, clonedNode);
-				maps.get(node).neighbors.add(clonedNode);
-				cloneGraphDFS(curr,maps);
-			} else {
-				maps.get(node).neighbors.add(maps.get(curr));
-			}
-		}
-	}
-	
-	
+    public Node cloneGraphDFS(Node node, Map<Node, Node> maps) {
+        if (maps.containsKey(node)) {
+            return maps.get(node);
+        }
+
+        Node cloneNode = new Node(node.val, new ArrayList<>());
+        maps.put(node, cloneNode);
+
+        for (Node curr : node.neighbors) {
+            Node cloned = cloneGraphDFS(curr, maps);
+            cloneNode.neighbors.add(cloned);
+        }
+
+        return cloneNode;
+    }
 }

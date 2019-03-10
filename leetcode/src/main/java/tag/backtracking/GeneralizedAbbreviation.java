@@ -8,9 +8,29 @@ public class GeneralizedAbbreviation {
 
     public List<String> generateAbbreviations(String word) {
         List<String> ans = new ArrayList<String>();
-        backtrack(ans, new StringBuilder(), word, 0, 0);
+        generateAbbreviations(ans, word, 0, 1);
         return ans;
     }
+
+
+    private void generateAbbreviations(List<String> ans,String word, int i, int k) {
+        if (k > word.length() || i >= word.length() || i + k > word.length()) {
+            return;
+        }
+        
+        if (i + k <= word.length()) {
+            String tmp = "";
+            tmp += word.substring(0, i);
+            tmp += k;
+            tmp += word.substring(i + k);
+            ans.add(tmp);
+        }
+        
+        
+        generateAbbreviations(ans, word, i + 1, k);
+        generateAbbreviations(ans, word, i, k + 1);
+    }
+
 
     // i is the current position
     // k is the count of consecutive abbreviated characters

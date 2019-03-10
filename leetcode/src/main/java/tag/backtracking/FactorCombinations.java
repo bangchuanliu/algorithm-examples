@@ -1,14 +1,12 @@
 package tag.backtracking;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class FactorCombinations {
 	public List<List<Integer>> getFactors(int n) {
 		List<List<Integer>> result = new ArrayList<>();
-		if (n <= 1) {
-			return result;
-		}
 		List<Integer> temp = new ArrayList<>();
 		getFactors(result, 2, n, temp);
 		return result;
@@ -30,12 +28,7 @@ public class FactorCombinations {
 
 	public static void main(String[] args) {
 		FactorCombinations instance = new FactorCombinations();
-		List<List<Integer>> result = instance.getFactors(12);
-		for (List<Integer> temp : result) {
-			for (Integer num : temp) {
-				System.out.print(num);
-			}
-			System.out.println();
-		}
+		List<List<Integer>> result = instance.getFactors(7);
+		System.out.print(Arrays.deepToString(result.toArray()));
 	}
 }

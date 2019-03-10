@@ -21,12 +21,7 @@ public class MergerKSortedList {
 		if (lists == null || lists.size() == 0) {
 			return null;
 		}
-		PriorityQueue<ListNode> q = new PriorityQueue<ListNode>(lists.size(), new Comparator<ListNode>() {
-			@Override
-			public int compare(ListNode o1, ListNode o2) {
-				return o1.val - o2.val;
-			}
-		});
+		PriorityQueue<ListNode> q = new PriorityQueue<ListNode>(lists.size(), (o1, o2) -> o1.val - o2.val);
 
 		for (ListNode node : lists) {
 			if (node != null) {
