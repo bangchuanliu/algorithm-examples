@@ -17,6 +17,8 @@ public class ValidNumber {
 
 		int start = 0;
 		int end = str.length() - 1;
+		
+		//spaces
 		while (start <= end && str.charAt(start) == ' ') {
 			start++;
 		}
@@ -29,6 +31,7 @@ public class ValidNumber {
 			end--;
 		}
 
+		// skip number sign
 		if (str.charAt(start) == '-' || str.charAt(start) == '+') {
 			start++;
 		}

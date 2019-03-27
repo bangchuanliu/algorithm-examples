@@ -2,11 +2,6 @@ package tag.diveconquer;
 
 public class BurstBalloons {
 	public int maxCoins(int[] nums) {
-
-		if (nums == null || nums.length == 0) {
-			return 0;
-		}
-
 		int n = nums.length;
 		int[] coins = new int[n + 2];
 		coins[0] = 1;

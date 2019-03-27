@@ -39,7 +39,7 @@ public class BestTimetoBuyandSellStockIII {
 		
 		int maxProfit = Integer.MIN_VALUE;
 		for (int i = 0; i < prices.length; i++) {
-			maxProfit = Math.max(left[i] + right[i], maxProfit);
+			maxProfit = Math.max(left[i] + right[i], maxProfit);	
 		}
 		return maxProfit;
 	}

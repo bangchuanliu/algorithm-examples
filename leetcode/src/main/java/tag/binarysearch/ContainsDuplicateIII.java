@@ -1,30 +1,24 @@
 package tag.binarysearch;
 
-import java.util.Set;
 import java.util.TreeSet;
 
 public class ContainsDuplicateIII {
 
 	public boolean containsNearbyAlmostDuplicate(int[] nums, int k, int t) {
-		if (nums == null || nums.length == 0 || k < 1 || t < 0) {
-			return false;
-		}
-
 		TreeSet<Long> set = new TreeSet<>();
 
 		for (int i = 0; i < nums.length; i++) {
-			long left = (long) nums[i] - t;
-			long right = (long) nums[i] + t + 1;
-			Set<Long> subset = set.subSet(left, right);
+			Long successor = set.ceiling(Long.valueOf(nums[i]));
+			Long pre = set.floor(Long.valueOf(nums[i]));
 
-			if (!subset.isEmpty()) {
-				return true;
-			}
-
-			set.add((long) nums[i]);
-
+			if (successor != null && Math.abs(nums[i] - successor) <= t 
+                    || pre != null && Math.abs(nums[i] - pre) <= t) {
+			    return true;
+            }
+            set.add(Long.valueOf(nums[i]));
+			
 			if (i >= k) {
-				set.remove((long) nums[i - k]);
+				set.remove(Long.valueOf(nums[i - k]));
 			}
 		}
 
@@ -33,7 +27,7 @@ public class ContainsDuplicateIII {
 	
 	public static void main(String[] args) {
 		ContainsDuplicateIII instance = new ContainsDuplicateIII();
-		int[] nums = {1,3,1};
-		System.out.println(instance.containsNearbyAlmostDuplicate(nums, 1, 1));
+		int[] nums = {1,0,1,1};
+		System.out.println(instance.containsNearbyAlmostDuplicate(nums, 1, 2));
 	}
 }
