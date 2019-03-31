@@ -10,24 +10,26 @@ import common.Interval;
 public class MergeIntervals {
 
     public List<Interval> merge(List<Interval> intervals) {
-        List<Interval> mergedIntervals = new ArrayList<>();
+        List<Interval> result = new ArrayList<>();
+        if (intervals == null || intervals.size() == 0) {
+            return result;
+        }
 
-        Collections.sort(intervals, (i1, i2) -> i1.start - i2.start);
+        Collections.sort(intervals, (a, b) -> a.start == b.start ? a.end - b.end : a.start - b.start);
 
         Interval pre = intervals.get(0);
 
         for (int i = 1; i < intervals.size(); i++) {
-            Interval interval = intervals.get(i);
-            if (interval.start <= pre.end) {
-                pre = new Interval(pre.start, Math.max(interval.end, pre.end));
+            Interval cur = intervals.get(i);
+
+            if (pre.end >= cur.start) {
+                pre = new Interval(pre.start, Math.max(cur.end, pre.end));
             } else {
-                mergedIntervals.add(pre);
-                pre = interval;
+                result.add(pre);
+                pre = cur;
             }
         }
-
-        mergedIntervals.add(pre);
-
-        return mergedIntervals;
+        result.add(pre);
+        return result;
     }
 }

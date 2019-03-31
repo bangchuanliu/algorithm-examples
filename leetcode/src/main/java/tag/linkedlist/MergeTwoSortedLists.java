@@ -29,7 +29,7 @@ public class MergeTwoSortedLists {
 				p.next = p1;
 				p = p1;
 				p1 = p1.next;
-			} else {
+			} else {	
 				p.next = p2;
 				p = p2;
 				p2 = p2.next;

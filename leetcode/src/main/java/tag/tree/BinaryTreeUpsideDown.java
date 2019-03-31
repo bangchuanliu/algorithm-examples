@@ -37,6 +37,32 @@ public class BinaryTreeUpsideDown {
 		}
 		return parent;
 	}
+
+
+	public TreeNode upsideDownBinaryTree2(TreeNode root) {
+		return upsideDownBinaryTree4(root, null);
+	}
+
+	public TreeNode upsideDownBinaryTree4(TreeNode root, TreeNode parent) {
+		if (root == null) {
+			return null;
+		}
+
+		TreeNode left = upsideDownBinaryTree4(root.left, root);
+		if (left == null) {
+			left = root;
+		}
+
+		if (parent != null) {
+			root.left = parent.right;
+			root.right = parent;
+		}else {
+			root.left = null;
+			root.right = null;
+		}
+
+		return left;
+	}
 	
 	public static void main(String[] args){
 		TreeNode n1 = new TreeNode(1);

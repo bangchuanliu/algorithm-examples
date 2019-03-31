@@ -8,31 +8,6 @@ public class ReverseLinkedList {
         }
 
         ListNode p = first;
-        ListNode q = first.next;
-
-        while (p != null && q != null) {
-            ListNode r = q.next;
-            q.next = p;
-            p = q;
-            q = r;
-        }
-        first.next = null;
-        return p;
-    }
-
-
-    /**
-     * better solution
-     *
-     * @param first
-     * @return
-     */
-    public static ListNode reverse2(ListNode first) {
-        if (first == null || first.next == null) {
-            return first;
-        }
-
-        ListNode p = first;
         ListNode next = null;
 
         while (p != null) {

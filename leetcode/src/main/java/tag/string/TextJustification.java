@@ -5,68 +5,65 @@ import java.util.List;
 
 public class TextJustification {
 
-	public List<String> fullJustify(String[] words, int maxWidth) {
-		List<String> result = new ArrayList<>();
-		if (words == null || words.length == 0) {
-			return result;
-		}
+    public List<String> fullJustify(String[] words, int maxWidth) {
+        List<String> result = new ArrayList<>();
+        int len = 0;
+        int last = 0;
 
-		int count = 0;
-		int last = 0;
+        for (int i = 0; i < words.length; i++) {
+            if (len + words[i].length() + i - last > maxWidth) {
+                StringBuilder sb = new StringBuilder();
 
-		for (int i = 0; i < words.length; i++) {
-			if (count + words[i].length() + i - last > maxWidth) {
-				StringBuilder sb = new StringBuilder();
-				if (i - last - 1 > 0) {
-					int spaceNum = (maxWidth - count) / (i - last - 1);
-					int extraNum = (maxWidth - count) % (i - last - 1);
+                if (i - last - 1 > 0) {
+                    int space = (maxWidth - len) / (i - last - 1);
+                    int extra = (maxWidth - len) % (i - last - 1);
 
-					for (int j = last; j < i; j++) {
-						sb.append(words[j]);
-						if (j < i - 1) {
-							for (int k = 0; k < spaceNum; k++) {
-								sb.append(" ");
-							}
-							if (extraNum > 0) {
-								sb.append(" ");
-								extraNum--;
-							}
-						}
-					}
-					result.add(new String(sb.toString()));
-				} else {
-					sb.append(words[last]);
-					for (int j = sb.length(); j < maxWidth; j++) {
-						sb.append(" ");
-					}
-					result.add(new String(sb.toString()));
-				}
+                    for (int k = last; k < i; k++) {
+                        sb.append(words[k]);
+                        if (k != i - 1) {
+                            for (int m = 0; m < space; m++) {
+                                sb.append(" ");
+                            }
 
-				count = 0;
-				last = i;
-			}
-			count += words[i].length();
-		}
+                            if (extra > 0) {
+                                sb.append(" ");
+                                extra--;
+                            }
+                        }
+                    }
+                } else {
+                    sb.append(words[last]);
+                    for (int k = words[last].length(); k < maxWidth; k++) {
+                        sb.append(" ");
+                    }
+                }
+                result.add(sb.toString());
+                len = words[i].length();
+                last = i;
+            } else {
+                len += words[i].length();
+            }
+        }
 
-		StringBuilder sb = new StringBuilder();
-		for (int j = last; j < words.length; j++) {
-			sb.append(words[j]);
-			if (sb.length() < maxWidth) {
-				sb.append(" ");
-			}
-		}
-		for (int j = sb.length(); j < maxWidth; j++) {
-			sb.append(" ");
-		}
-		result.add(sb.toString());
+        StringBuilder sb = new StringBuilder();
+        for (int j = last; j < words.length; j++) {
+            sb.append(words[j]);
+            if (sb.length() < maxWidth) {
+                sb.append(" ");
+            }
+        }
+        for (int j = sb.length(); j < maxWidth; j++) {
+            sb.append(" ");
+        }
+        result.add(sb.toString());
 
-		return result;
-	}
+        return result;
+    }
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		String test = "Hello this is a test string";
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        String test = "Hello this is a test string";
 //		System.out.println(fullJustify(test.split("\\s+"), 40));
 //		System.out.println(fullJustify(test.split("\\s+"), 17));
-	}
+    }
 }

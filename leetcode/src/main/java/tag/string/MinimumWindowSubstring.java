@@ -6,55 +6,52 @@ import java.util.Map;
 public class MinimumWindowSubstring {
 
     public String minWindow(String s, String t) {
-
         Map<Character, Integer> tmap = new HashMap<>();
-        Map<Character, Integer> temp = new HashMap<>();
+        Map<Character, Integer> smap = new HashMap<>();
 
-        for (int i = 0; i < t.length(); i++) {
-            tmap.put(t.charAt(i), tmap.getOrDefault(t.charAt(i), 0) + 1);
-        }
-        String result = "";
         int i = 0;
-        while (i < s.length() && !tmap.containsKey(s.charAt(i))) {
-            i++;
+        int j = 0;
+
+        int[] result = {-1, 0, 0};
+
+        for (int k = 0; k < t.length(); k++) {
+            tmap.put(t.charAt(k), tmap.getOrDefault(t.charAt(k), 0) + 1);
         }
-        int j = i;
-        while (i <= j && j < s.length()) {
-            if (tmap.containsKey(s.charAt(j))) {
-                temp.put(s.charAt(j), temp.getOrDefault(s.charAt(j), 0) + 1);
-                while (isFound(tmap, temp)) {
-                    if (result.isEmpty() || s.substring(i, j+1).length() < result.length()) {
-                        result = s.substring(i,j+1);
-                    }
-                    temp.put(s.charAt(i), temp.getOrDefault(s.charAt(i), 0) - 1);
-                    i++;
-                    while (i < s.length() && !tmap.containsKey(s.charAt(i))) {
-                        i++;
-                    }
-                }
+
+        int tSize = tmap.size();
+        int sSize = 0;
+
+        while (j < s.length()) {
+            char c = s.charAt(j);
+            smap.put(c, smap.getOrDefault(c, 0) + 1);
+
+            if (tmap.containsKey(c) && tmap.get(c).equals(smap.get(c))) {
+                sSize++;
             }
+
+            while (i <= j && sSize == tSize) {
+                if (result[0] == -1 || j - i + 1 < result[0]) {
+                    result[0] = j - i + 1;
+                    result[1] = i;
+                    result[2] = j;
+                }
+
+                char ch = s.charAt(i);
+                smap.put(ch, smap.get(ch) - 1);
+                if (tmap.containsKey(ch) && tmap.get(ch).intValue() > smap.get(ch).intValue()) {
+                    sSize--;
+                }
+                i++;
+            }
+
             j++;
         }
 
-        return result;
+        return result[0] == -1 ? "" : s.substring(result[1], result[2] + 1);
     }
 
-
-    public boolean isFound(Map<Character, Integer> tmap, Map<Character, Integer> temp) {
-        if (tmap.size() != temp.size()) {
-            return false;
-        }
-
-        for (Character c : tmap.keySet()) {
-            if (!temp.containsKey(c) || temp.get(c) < tmap.get(c)) {
-                return false;
-            }
-        }
-        return true;
-    }
-    
     public static void main(String[] args) {
         MinimumWindowSubstring minimumWindowSubstring = new MinimumWindowSubstring();
-        System.out.println(minimumWindowSubstring.minWindow("ADOBECODEBANC","ABC"));
+        System.out.println(minimumWindowSubstring.minWindow("ADOBECODEBANC", "ABC"));
     }
 }
