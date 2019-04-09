@@ -46,16 +46,10 @@ public class WordLadder {
         Set<String> marked = new HashSet<>();
 
         int dis = 0;
-        boolean found = false;
         q.add(beginWord);
         marked.add(beginWord);
 
         while (!q.isEmpty()) {
-
-            if (found) {
-                break;
-            }
-
             int size = q.size();
             dis++;
 
@@ -63,8 +57,7 @@ public class WordLadder {
                 String str = q.poll();
 
                 if (endWord.equals(str)) {
-                    found = true;
-                    break;
+                    return dis;
                 }
 
                 for (int j = 0; j < beginWord.length(); j++) {
@@ -83,7 +76,7 @@ public class WordLadder {
             }
         }
 
-        return found == true ? dis : 0;
+        return 0;
     }
 
     public static void main(String[] args) {

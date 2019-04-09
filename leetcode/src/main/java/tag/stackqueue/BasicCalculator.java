@@ -8,7 +8,6 @@ public class BasicCalculator {
         if (s == null || s.length() == 0) {
             return 0;
         }
-        s = s.replace(" ", "");
         int sign = 1;
         int result = 0;
 
@@ -24,15 +23,18 @@ public class BasicCalculator {
                 result += sum * sign;
             } else if (s.charAt(i) == '+') {
                 sign = 1;
+                if (!stack.isEmpty()) {
+                    sign = stack.peek();
+                }
             } else if (s.charAt(i) == '-') {
                 sign = -1;
+                if (!stack.isEmpty()) {
+                    sign = stack.peek() * sign;
+                }
             } else if (s.charAt(i) == '(') {
-                stack.push(result);
                 stack.push(sign);
-                result = 0;
-                sign = 1;
             } else if (s.charAt(i) == ')') {
-                result = result * stack.pop() + stack.pop();
+                stack.pop();
             }
         }
 

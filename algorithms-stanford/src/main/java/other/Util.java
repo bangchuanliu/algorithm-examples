@@ -5,16 +5,24 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeSet;
 
 public class Util {
 
     public static void main(String[] args) {
-        int[][] edges ={{0, 3}, {1, 3}, {2, 3}, {4, 3}, {5, 4}};
+        TreeSet<Integer> treeSet = new TreeSet<>();
+
+
+        treeSet.add(1);
+        treeSet.add(3);
+        treeSet.add(5);
+        treeSet.add(7);
+        treeSet.add(9);
         
-        Map<String ,List<String>> map = new HashMap<>();
-        
-        map.computeIfAbsent("aaa", v -> new ArrayList<>()).add("a");
+        System.out.println(Arrays.toString(treeSet.tailSet(4).toArray()));
+        System.out.println(Arrays.toString(treeSet.tailSet(5).toArray()));
     }
 
+   
     
 }

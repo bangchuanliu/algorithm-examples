@@ -17,7 +17,7 @@ public class RangeModule {
         Iterator<Interval> intervals = ranges.tailSet(new Interval(0, left)).iterator();
         while (intervals.hasNext()) {
             Interval ite = intervals.next();
-            if (ite.left > right) {
+            if (ite.left > right) { 
                 break;
             }
             left = Math.min(left, ite.left);

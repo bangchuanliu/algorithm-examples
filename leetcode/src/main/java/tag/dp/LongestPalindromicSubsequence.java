@@ -17,17 +17,13 @@ public class LongestPalindromicSubsequence {
             }
         }
 
-        for (int j = 2; j < s.length(); j++) {
-            int low = 0;
-            int high = j;
-            while (high < s.length()) {
-                if (s.charAt(low) == s.charAt(high)) {
-                    dp[low][high] = dp[low + 1][high - 1] + 2;
+        for (int i = 2; i < s.length(); i++) {
+            for (int j = i - 2; j >= 0; j--) {
+                if (s.charAt(i) == s.charAt(j)) {
+                    dp[j][i] = dp[j + 1][i - 1] + 2;
                 } else {
-                    dp[low][high] = Math.max(dp[low + 1][high], dp[low][high - 1]);
+                    dp[j][i] = Math.max(dp[j + 1][i], dp[j][i - 1]);
                 }
-                low++;
-                high++;
             }
         }
 

@@ -7,8 +7,8 @@ import java.util.PriorityQueue;
 public class LFUCache {
 
     private Map<Integer, Integer> cache;
-    private Map<Integer, KeyCount> count;
-    private PriorityQueue<KeyCount> pq;
+    private Map<Integer, long[]> count;
+    private PriorityQueue<long[]> pq;
     private int capacity;
 
     public LFUCache(int capacity) {
@@ -16,22 +16,19 @@ public class LFUCache {
         cache = new HashMap<>(capacity);
         count = new HashMap<>(capacity);
         pq = new PriorityQueue<>((a,b ) -> {
-            if (a.count == b.count) {
-                return a.timestamp > b.timestamp ? 1 : -1;
+            if (a[0] == b[0]) {
+                return a[1] > b[1] ? 1 : -1;
             } else {
-                return a.count - b.count;
+                return a[0] > b[0] ? 1 : -1;
             }
         });
     }
 
     public int get(int key) {
         if (cache.containsKey(key)) {
-            KeyCount keyCount = count.get(key);
-            pq.remove(keyCount);
-            pq.remove(keyCount);
-            keyCount.count++;
-            keyCount.timestamp = System.currentTimeMillis();
-            pq.add(keyCount);
+            long[] keyCount = count.get(key);
+            keyCount[0]++;
+            keyCount[1] = System.currentTimeMillis();
             count.put(key, keyCount);
             return cache.get(key);
         }
@@ -40,38 +37,33 @@ public class LFUCache {
     }
 
     public void put(int key, int value) {
-        if (!cache.containsKey(key)) {
-            if (capacity == cache.size()) {
-                KeyCount keyCount = pq.poll();
-                cache.remove(keyCount.key);
-                count.remove(keyCount.key);
+        if (capacity != 0) {
+            if (!cache.containsKey(key)) {
+                if (capacity == cache.size()) {
+                    long[] keyCount = pq.poll();
+                    cache.remove(Integer.valueOf(keyCount[2]+""));
+                    count.remove(Integer.valueOf(keyCount[2]+""));
+                }
+                long[] keyCount = new long[]{1, System.currentTimeMillis(),key};
+                pq.add(keyCount);
+                count.put(key, keyCount);
             }
-            KeyCount keyCount = new KeyCount(key, 1, System.currentTimeMillis());
-            pq.add(keyCount);
-            count.put(key, keyCount);
+            cache.put(key, value);
         }
-        cache.put(key, value);
     }
 
-    class KeyCount {
-        int key;
-        int count;
-        long timestamp;
-        KeyCount(int key, int count, long timestamp) {
-            this.key = key;
-            this.count = count;
-            this.timestamp = timestamp;
-        }
-    }
-    
     public static void main(String[] args) {
         LRUCacheII instance = new LRUCacheII(2);
-        instance.put(2, 1);
-        instance.put(2, 2);
-        System.out.println(instance.get(2));
         instance.put(1, 1);
-        instance.put(4, 1);
+        instance.put(2, 2);
+        System.out.println(instance.get(1));
+        instance.put(3, 3);
         System.out.println(instance.get(2));
+        System.out.println(instance.get(3));
+        instance.put(4, 4);
+        System.out.println(instance.get(1));
+        System.out.println(instance.get(3));
+        System.out.println(instance.get(4));
 
 //        System.out.println(instance.get(1));
 //        System.out.println(instance.get(3));
