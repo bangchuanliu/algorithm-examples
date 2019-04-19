@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class SubarraySumEqualsK {
 
+    // sums[0] + k imply sub array len = 1
     public int subarraySum(int[] nums, int k) {
         int[] sums = new int[nums.length + 1];
         for (int i = 1; i < sums.length; i++) {

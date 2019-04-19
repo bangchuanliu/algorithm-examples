@@ -3,6 +3,9 @@ package tag.tree;
 import common.TreeNode;
 import common.TreeNodeUtil;
 
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
 public class SerializeandDeserializeBST {
     public String serialize(TreeNode root) {
         if (root == null) {
@@ -22,26 +25,32 @@ public class SerializeandDeserializeBST {
         if (data == null || data.length() == 0) {
             return null;
         }
-        String[] datas = data.split(" ");
 
-        return deserialize(datas, 0, datas.length - 1);
+        String[] strs = data.split(",");
+        int[] num = new int[strs.length];
+        
+        for (int i = 0; i < num.length; i++) {
+            num[i] = Integer.parseInt(strs[i]);
+        }
+
+        return deserialize(num, 0, num.length - 1);
     }
 
-    public TreeNode deserialize(String[] datas, int i, int j) {
+    public TreeNode deserialize(int[] num, int i, int j) {
         if (i > j) {
             return null;
         }
-        TreeNode root = new TreeNode(Integer.parseInt(datas[i]));
-        int index = i + 1;
-        while (index < datas.length && Integer.parseInt(datas[index]) < root.val) {
-            index++;
-        }
-        TreeNode left = deserialize(datas, i + 1, index - 1);
-        TreeNode right = deserialize(datas, index, j);
-        root.left = left;
-        root.right = right;
 
-        return root;
+        TreeNode node = new TreeNode(num[i]);
+        int k = i + 1;
+        while(k <= j && num[k] < num[i]) {
+            k++;
+        }
+
+        node.left = deserialize(num, i+1, k-1);
+        node.right = deserialize(num, k, j);
+
+        return node;
     }
 
     public static void main(String[] args) {

@@ -23,28 +23,19 @@ public class AddTwoNumbersII {
 
         ListNode helper = new ListNode(1);
         int adv = 0;
-        while (!s1.isEmpty() && !s2.isEmpty() ) {
-            int val1 = s1.pop();
-            int val2 = s2.pop();
-            int val = (val1 + val2 + adv) % 10;
-            adv = (val1 + val2 + adv) / 10;
-            ListNode node = new ListNode(val);
-            node.next = helper.next;
-            helper.next = node;
-        }
+        while (!s1.isEmpty() || !s2.isEmpty() ) {
+            int temp = adv;
+            
+            if (!s1.isEmpty()) {
+                temp += s1.pop();
+            }
 
-        while (!s1.isEmpty()) {
-            int val = (s1.peek() + adv) % 10;
-            adv = (s1.pop() + adv) / 10;
-            ListNode node = new ListNode(val);
-            node.next = helper.next;
-            helper.next = node;
-        }
-
-        while (!s2.isEmpty()) {
-            int val = (s2.peek() + adv) % 10;
-            adv = (s2.pop() + adv) / 10;
-            ListNode node = new ListNode(val);
+            if (!s2.isEmpty()) {
+                temp += s2.pop();
+            }
+            
+            adv = temp / 10;
+            ListNode node = new ListNode(temp % 10);
             node.next = helper.next;
             helper.next = node;
         }

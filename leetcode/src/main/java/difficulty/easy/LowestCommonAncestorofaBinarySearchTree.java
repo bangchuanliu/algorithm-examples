@@ -34,12 +34,28 @@ public class LowestCommonAncestorofaBinarySearchTree {
             return lowestCommonAncestor(root.right, p, q);
         } else if (p.val < root.val && q.val < root.val) {
             return lowestCommonAncestor(root.left, p, q);
-        } else if (p.val == root.val) {
-            return p;
-        } else if (q.val == root.val) {
-            return q;
         } else {
             return root;
         }
+    }
+
+
+    public TreeNode lowestCommonAncestor2(TreeNode root, TreeNode p, TreeNode q) {
+        int pv = p.val;
+        int qv = q.val;
+
+        TreeNode node = root;
+
+        while (node != null) {
+            if (pv > node.val && qv > node.val) {
+                node = node.right;
+            }else if (pv < node.val && qv < node.val) {
+                node = node.left;
+            }else {
+                return node;
+            }
+        }
+
+        return null;
     }
 }

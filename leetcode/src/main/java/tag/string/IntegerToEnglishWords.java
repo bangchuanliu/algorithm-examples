@@ -38,50 +38,48 @@ public class IntegerToEnglishWords {
         numberWordMap.put(80, "Eighty");
         numberWordMap.put(90, "Ninety");
 
-        numberUnitMap.put(3, " Billion ");
-        numberUnitMap.put(2, " Million ");
-        numberUnitMap.put(1, " Thousand ");
+        numberUnitMap.put(3, "Billion");
+        numberUnitMap.put(2, "Million");
+        numberUnitMap.put(1, "Thousand");
         numberUnitMap.put(0, "");
     }
 
     public String numberToWords(int num) {
-        String result = "";
+        StringBuilder sb = new StringBuilder();
         String str = String.valueOf(num);
         while (str.length() % 3 != 0) {
             str = "0" + str;
         }
 
-        int units = (str.length() - 1) / 3;
-
-        while (units >= 0) {
-            if (!helper(str.substring(0, 3)).trim().equals("")) {
-                result += helper(str.substring(0, 3)).trim() + numberUnitMap.get(units);    
-            }
+        while (str.length() > 0) {
+            int unit = (str.length()-1) / 3;
+            String sub = str.substring(0,3);
+            helper(sub, sb, numberUnitMap.get(unit));
             str = str.substring(3);
-            units--;
         }
 
-        return result.equals("") ? "Zero" : result.trim().replaceAll("\\s+"," ");
+        return sb.toString().trim().equals("") ? "Zero" : sb.toString().trim().replaceAll("\\s+"," ");
     }
 
-    public String helper(String str) {
-        String ret = "";
-
+    public void helper(String str, StringBuilder sb, String unit) {
         if (str.charAt(0) != '0') {
-            ret += numberWordMap.get(str.charAt(0) - '0') + " Hundred ";
+            sb.append(numberWordMap.get(str.charAt(0) - '0')).append(" Hundred ");
         }
 
         int num = Integer.parseInt(str.substring(1));
         if (numberWordMap.containsKey(num)) {
-            ret += numberWordMap.get(num);
+            sb.append(numberWordMap.get(num));
         } else {
             int n2 = num % 10;
             int n1 = num - n2;
 
-            ret += numberWordMap.get(n1);
-            ret += " " + numberWordMap.get(n2);
+            sb.append(numberWordMap.get(n1)).append(" ");
+            sb.append(numberWordMap.get(n2));
         }
-        return ret;
+        
+        if (Integer.parseInt(str) != 0) {
+            sb.append(" ").append(unit).append(" ");
+        }
     }
 
     public static void main(String[] args) {

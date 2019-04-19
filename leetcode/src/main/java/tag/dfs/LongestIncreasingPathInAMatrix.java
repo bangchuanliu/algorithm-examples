@@ -2,42 +2,48 @@ package tag.dfs;
 
 public class LongestIncreasingPathInAMatrix {
 
-    public static int longestIncreasingPath(int[][] matrix) {
+    int[][] dir = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+
+    public int longestIncreasingPath(int[][] matrix) {
+        if (matrix == null || matrix.length == 0) {
+            return 0;
+        }
+
+        int[][] mem = new int[matrix.length][matrix[0].length];
         int max = 0;
-        
         for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[0].length; j++) {
-                int[][] cached = new int[matrix.length][matrix[0].length];
-                int len = dfs(matrix, cached, i, j);
-                max = Math.max(max, len);
+            for (int j = 0; j < matrix[i].length; j++) {
+                max = Math.max(dfs(matrix, i, j, mem), max);
             }
         }
+
         return max;
     }
 
-    public static int dfs(int[][] matrix, int[][] cached, int i, int j) {
-        if (cached[i][j] != 0) {
-            return cached[i][j];
+
+    public int dfs(int[][] matrix, int i, int j, int[][] mem) {
+        if (mem[i][j] > 0) {
+            return mem[i][j];
         }
-        int max = 1;
-        int[][] dis = {{1,0},{-1,0},{0,1},{0,-1}};
-        for (int[] d : dis) {
+        
+        int count = 0;
+
+        for (int[] d : dir) {
             int x = i + d[0];
             int y = j + d[1];
-            
-            if (x < 0 || x >= matrix.length || y < 0 || y >= matrix[x].length || matrix[x][y] <= matrix[i][j]) {
+            if (x < 0 || x >= matrix.length || y < 0 || y >= matrix[0].length || matrix[x][y] <= matrix[i][j]) {
                 continue;
             }
-            int len = 1 + dfs(matrix, cached, x, y);
-            max = Math.max(max, len);
+            count = Math.max(dfs(matrix, x, y, mem), count);
         }
-        cached[i][j] = max;
-        
-        return max;
+        int ans = count + 1;
+        mem[i][j] = ans;
+        return ans;
     }
 
     public static void main(String[] args) {
-        int[][] matrix = {{3,3,14,2,17,12,5}};
-        System.out.println(longestIncreasingPath(matrix));
+        LongestIncreasingPathInAMatrix inAMatrix = new LongestIncreasingPathInAMatrix();
+        int[][] matrix = {{3, 3, 14, 2, 17, 12, 5}};
+        System.out.println(inAMatrix.longestIncreasingPath(matrix));
     }
 }
