@@ -53,7 +53,7 @@ public class LFUCache {
     }
 
     public static void main(String[] args) {
-        LRUCacheII instance = new LRUCacheII(2);
+        LFUCache instance = new LFUCache(2);
         instance.put(1, 1);
         instance.put(2, 2);
         System.out.println(instance.get(1));

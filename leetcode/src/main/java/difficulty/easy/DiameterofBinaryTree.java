@@ -5,33 +5,28 @@ import common.TreeNodeUtil;
 
 public class DiameterofBinaryTree {
 
-    public int diameterOfBinaryTree(TreeNode root) {
-        if (root == null) {
-            return 0;
-        }
-        int max = 0;
-        max = Math.max(max, maxDepth(root.left) + maxDepth(root.right));
+    int max = 0;
 
-        int left = diameterOfBinaryTree(root.left);
-        int right = diameterOfBinaryTree(root.right);
-        max = Math.max(max, Math.max(left, right));
+    public int diameterOfBinaryTree(TreeNode root) {
+        helper(root);
         return max;
     }
 
-
-
-    public int maxDepth(TreeNode root) {
+    public int helper(TreeNode root) {
         if (root == null) {
             return 0;
         }
-        int maxL = maxDepth(root.left);
-        int maxR = maxDepth(root.right);
-        return Math.max(maxL, maxR) + 1;
+        int left = helper(root.left);
+        int right = helper(root.right);
+
+        max = Math.max(max, left + right);
+
+        return Math.max(left, right) + 1;
     }
-    
+
     public static void main(String[] args) {
         DiameterofBinaryTree diameterofBinaryTree = new DiameterofBinaryTree();
-        Integer[] nums = {1,2,3,4,5};
+        Integer[] nums = {1, 2, 3, 4, 5};
         TreeNode root = TreeNodeUtil.creatTree(nums);
         System.out.println(diameterofBinaryTree.diameterOfBinaryTree(root));
     }

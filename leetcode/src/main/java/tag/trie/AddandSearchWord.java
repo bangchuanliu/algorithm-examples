@@ -1,7 +1,5 @@
 package tag.trie;
 
-import java.util.Map;
-
 public class AddandSearchWord {
 
     private TrieNode root;
@@ -15,14 +13,11 @@ public class AddandSearchWord {
         TrieNode curr = root;
 
         for (int i = 0; i < word.length(); i++) {
-            Map<Character, TrieNode> children = curr.children;
-            if (!children.containsKey(word.charAt(i))) {
-                TrieNode newNode = new TrieNode(word.charAt(i));
-                children.put(word.charAt(i), newNode);
-                curr = newNode;
-            } else {
-                curr = children.get(word.charAt(i));
+            if (!curr.children.containsKey(word.charAt(i))) {
+                TrieNode node = new TrieNode(word.charAt(i));
+                curr.children.put(word.charAt(i), node);
             }
+            curr = curr.children.get(word.charAt(i));
         }
         curr.isLeaf = true;
     }
@@ -35,6 +30,10 @@ public class AddandSearchWord {
     }
 
     public boolean search(String word, TrieNode root) {
+        if (root == null) {
+            return false;
+        }
+
         if (word.isEmpty()) {
             return root.isLeaf;
         }
@@ -42,13 +41,13 @@ public class AddandSearchWord {
         if (root.children.containsKey(word.charAt(0))) {
             return search(word.substring(1), root.children.get(word.charAt(0)));
         } else if (word.charAt(0) == '.') {
-            for (Map.Entry<Character, TrieNode> entry : root.children.entrySet()) {
-                if (search(word.substring(1), entry.getValue())) {
+            for (char c : root.children.keySet()) {
+                if (search(word.substring(1), root.children.get(c))) {
                     return true;
                 }
             }
         }
-        
+
         return false;
     }
 

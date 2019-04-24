@@ -13,59 +13,64 @@ public class LRUCache<K, V> {
 	public LRUCache(int capacity) {
 		this.capacity = capacity;
 		cache = new HashMap<>(capacity);
+		head = new Node<>();
+		tail = new Node<>();
+		head.next = tail;
+		tail.pre = head;
 	}
 
 	public V get(K key) {
 		if (cache.containsKey(key)) {
-			Node<K, V> node = cache.get(key);
+			Node<K,V> node = cache.get(key);
 			removeNode(node);
-			setHead(node);
+			addNode(node);
+
 			return node.value;
 		}
+
 		return null;
 	}
 
-	public void removeNode(Node<K, V> node) {
-		if (node == head) {
-			head = head.next;
-		} else {
-			node.pre.next = node.next;
-		}
+	public void removeNode(Node node) {
+		Node pre = node.pre;
+		Node next = node.next;
 
-		if (node == tail) {
-			tail = tail.pre;
-		} else {
-			node.next.pre = node.pre;
-		}
+		pre.next = next;
+		next.pre = pre;
 	}
 
-	public void setHead(Node<K, V> node) {
-		node.next = head;
-		if (head != null) {
-			head.pre = node;
-		}
+	public void addNode(Node node) {
+		node.next = head.next;
+		node.pre = head;
 
-		if (tail == null) {
-			tail = node;
-		}
-
-		head = node;
+		head.next = node;
+		node.next.pre = node;
 	}
 
-	public void set(K key, V value) {
+	public Node removeTail() {
+		Node node = tail.pre;
+
+		node.pre.next = tail;
+		tail.pre = node.pre;
+
+		return node;
+	}
+
+	public void put(K key, V value) {
 		if (cache.containsKey(key)) {
-			Node<K, V> node = cache.get(key);
+			Node<K,V> node = cache.get(key);
 			node.value = value;
-			removeNode(node);
-			setHead(node);
-		} else {
-			if (cache.size() == capacity) {
-				cache.remove(tail.key);
-				removeNode(tail);
-			}
-			Node<K, V> node = new Node<K, V>(key, value);
-			setHead(node);
 			cache.put(key, node);
+			removeNode(node);
+			addNode(node);
+		}else{
+			if (capacity == cache.size()) {
+				Node node = removeTail();
+				cache.remove(node.key);
+			}
+			Node node = new Node(key, value);
+			cache.put(key, node);
+			addNode(node);
 		}
 	}
 
@@ -74,7 +79,8 @@ public class LRUCache<K, V> {
 		VAL value;
 		Node<KEY, VAL> pre;
 		Node<KEY, VAL> next;
-
+		public Node(){}
+		
 		public Node(KEY key, VAL value) {
 			this.key = key;
 			this.value = value;

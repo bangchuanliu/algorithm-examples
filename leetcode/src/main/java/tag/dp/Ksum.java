@@ -22,4 +22,10 @@ public class Ksum {
         
         return dp[A.length][k][target];
     }
+    
+    public static void main(String[] args) {
+        Ksum ksum = new Ksum();
+        int A[] = {1,2,3,4,5,6,7,8,9};
+        System.out.println(ksum.kSum(A, 3, 8));
+    }
 }

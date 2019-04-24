@@ -13,49 +13,27 @@ import java.util.stream.Collectors;
 
 public class DijkstraShortestPathWithHeap {
 
-    static class HeapKey {
-        int v;
-        int dist;
-
-        HeapKey(int v, int dist) {
-            this.v = v;
-            this.dist = dist;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            HeapKey heapKey = (HeapKey) o;
-            return v == heapKey.v;
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(v);
-        }
-    }
-
     public static int[] shortestDistance(AdjListWeightedEdgeGraph graph, int s) {
         int[] dist = new int[graph.V() + 1];
-        PriorityQueue<HeapKey> minHeap = new PriorityQueue<>((o1, o2) -> (o1.dist - o2.dist));
+        
+        PriorityQueue<int[]> minHeap = new PriorityQueue<>((o1, o2) -> (o1[1] - o2[1]));
+        
         for (int i = 1; i < dist.length; i++) {
             if (i != s) {
                 dist[i] = Integer.MAX_VALUE;
             }
-            HeapKey heapKey = new HeapKey(i, dist[i]);
-            minHeap.add(heapKey);
+            minHeap.add(new int[]{i, dist[i]});
         }
         
         Set<Integer> vertices = new HashSet<>();
         while (vertices.size() < graph.V()) {
-            int u = minHeap.poll().v;
+            int u = minHeap.poll()[0];
             vertices.add(u);
             for (AdjListWeightedEdgeGraph.vertexNode vertexNode : graph.getAdj(u)) {
                 if (!vertices.contains(vertexNode.v) && dist[u] + vertexNode.weight < dist[vertexNode.v]) {
-                    minHeap.remove(new HeapKey(vertexNode.v, dist[vertexNode.v]));
+                    minHeap.remove(new int[]{vertexNode.v, dist[vertexNode.v]});
                     dist[vertexNode.v] = dist[u] + vertexNode.weight;
-                    minHeap.add(new HeapKey(vertexNode.v, dist[vertexNode.v]));
+                    minHeap.add(new int[]{vertexNode.v, dist[vertexNode.v]});
                 }
             }
         }
