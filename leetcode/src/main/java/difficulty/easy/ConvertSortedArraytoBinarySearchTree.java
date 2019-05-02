@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import common.TreeNode;
-import difficulty.medium.BinaryTreePreorderTraversal;
+import tag.tree.BinaryTreePreorderTraversal;
 
 /**
  * Given an array where elements are sorted in ascending order, convert it to a

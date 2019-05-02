@@ -23,6 +23,51 @@ public class KthLargestElementinanArray {
         return minHeap.peek();
     }
 
+    public int findKthLargest2(int[] nums, int k) {
+        int i = 0;
+        int j = nums.length - 1;
+        int offset = k - 1;
+        while (i <= j) {
+            int index = partition(nums, i, j);
+
+            if (index == offset) {
+                return nums[index];
+            } else if (index > offset) {
+                j = index - 1;
+            } else {
+                i = index + 1;
+            }
+        }
+
+        return -1;
+    }
+
+
+
+    public int partition(int[] nums, int low,  int high) {
+        int pivot = nums[high];
+
+        int i = low;
+        int j = high - 1;
+
+        while(i <= j) {
+            if (nums[i] >= pivot) {
+                i++;
+            } else {
+                int temp = nums[j];
+                nums[j] = nums[i];
+                nums[i] = temp;
+                j--;
+            }
+        }
+        int temp = nums[i];
+        nums[i] = nums[high];
+        nums[high] = temp;
+
+        return i;
+    }
+    
+    
     public static void main(String[] args) {
         KthLargestElementinanArray instance = new KthLargestElementinanArray();
         int[] nums = {1, 2, 3, 4, 5};

@@ -16,23 +16,15 @@ public class TopKFrequentElements {
             map.put(num, map.getOrDefault(num, 0) + 1);
         }
 
-        List<Integer> result = new ArrayList<>();
+        PriorityQueue<Integer> q = new PriorityQueue<>((a, b) -> map.get(a) - map.get(b));
 
-        PriorityQueue<Integer> heap =
-                new PriorityQueue<>((n1, n2) -> map.get(n1) - map.get(n2));
-
-        for (Integer key : map.keySet()) {
-            heap.add(key);
-            if (heap.size() > k) {
-                heap.poll();
+        for (int num : map.keySet()) {
+            q.add(num);
+            if (q.size() > k) {
+                q.poll();
             }
         }
 
-        while(!heap.isEmpty()) {
-            result.add(heap.poll());
-        }
-
-        Collections.reverse(result);
-        return result;
+        return new ArrayList<>(q);
     }
 }

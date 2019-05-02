@@ -1,4 +1,4 @@
-package difficulty.medium;
+package tag.tree;
 
 import java.util.ArrayList;
 import java.util.List;
