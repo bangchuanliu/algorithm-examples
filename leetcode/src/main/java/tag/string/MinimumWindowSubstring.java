@@ -6,52 +6,39 @@ import java.util.Map;
 public class MinimumWindowSubstring {
 
     public String minWindow(String s, String t) {
-        Map<Character, Integer> tmap = new HashMap<>();
-        Map<Character, Integer> smap = new HashMap<>();
+        Map<Character, Integer> map = new HashMap<>();
 
-        int i = 0;
-        int j = 0;
-
-        int[] result = {-1, 0, 0};
-
-        for (int k = 0; k < t.length(); k++) {
-            tmap.put(t.charAt(k), tmap.getOrDefault(t.charAt(k), 0) + 1);
+        for (char c : t.toCharArray()) {
+            map.put(c, map.getOrDefault(c, 0) + 1);
         }
 
-        int tSize = tmap.size();
-        int sSize = 0;
-
-        while (j < s.length()) {
+        int i = 0;
+        int dis = Integer.MAX_VALUE;
+        int pos = -1;
+        int count = map.size();
+        for (int j = 0; j < s.length(); j++) {
             char c = s.charAt(j);
-            smap.put(c, smap.getOrDefault(c, 0) + 1);
 
-            if (tmap.containsKey(c) && tmap.get(c).equals(smap.get(c))) {
-                sSize++;
-            }
+            map.put(c, map.getOrDefault(c, 0) - 1);
 
-            while (i <= j && sSize == tSize) {
-                if (result[0] == -1 || j - i + 1 < result[0]) {
-                    result[0] = j - i + 1;
-                    result[1] = i;
-                    result[2] = j;
-                }
+            if (map.get(c) == 0) count--;
 
-                char ch = s.charAt(i);
-                smap.put(ch, smap.get(ch) - 1);
-                if (tmap.containsKey(ch) && tmap.get(ch).intValue() > smap.get(ch).intValue()) {
-                    sSize--;
-                }
+            while (i <= j && map.get(s.charAt(i)) < 0) {
+                map.put(s.charAt(i), map.get(s.charAt(i)) + 1);
                 i++;
             }
 
-            j++;
+            if (count == 0 && j - i + 1 < dis) {
+                dis = j - i + 1;
+                pos = i;
+            }
         }
 
-        return result[0] == -1 ? "" : s.substring(result[1], result[2] + 1);
+        return dis == Integer.MAX_VALUE ? "" : s.substring(pos, pos + dis);
     }
 
     public static void main(String[] args) {
         MinimumWindowSubstring minimumWindowSubstring = new MinimumWindowSubstring();
-        System.out.println(minimumWindowSubstring.minWindow("ADOBECODEBANC", "ABC"));
+        System.out.println(minimumWindowSubstring.minWindow("BAACAAAAAAACB", "ABC"));
     }
 }

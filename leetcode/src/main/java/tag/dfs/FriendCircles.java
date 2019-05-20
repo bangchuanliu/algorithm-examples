@@ -1,33 +1,27 @@
 package tag.dfs;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class FriendCircles {
 
     public int findCircleNum(int[][] M) {
         int count = 0;
-        Set<Integer> set = new HashSet<>();
+        boolean[] marked = new boolean[M.length];
         for (int i = 0; i < M.length; i++) {
-            if (!set.contains(i)) {
+            if (!marked[i]) {
                 count++;
-                set.add(i);
-                dfs(M, set, i);
+                dfs(M, i, marked);
             }
         }
-        
+
         return count;
     }
 
-    public void dfs(int[][] M, Set<Integer> set, int v) {
-        if (set.size() == M.length) {
-            return;
-        }
-        
-        for (int i = 0; i < M.length; i++) {
-            if (M[v][i] == 1 && !set.contains(i)) {
-                set.add(i);
-                dfs(M, set, i);
+
+
+    public void dfs(int[][] M, int i, boolean[] marked) {
+        for (int j = 0; j < M[i].length; j++) {
+            if (M[i][j] == 1 && !marked[j]) {
+                marked[j] = true;
+                dfs(M, j, marked);
             }
         }
     }

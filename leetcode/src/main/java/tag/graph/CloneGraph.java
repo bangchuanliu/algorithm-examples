@@ -18,28 +18,27 @@ public class CloneGraph {
     public Node cloneGraph(Node node) {
 
         Queue<Node> queue = new LinkedList<>();
-        Map<Node, Node> maps = new HashMap<>();
+        Map<Node, Node> map = new HashMap<>();
 
-        Node newHead = new Node(node.val, new ArrayList<>());
+        Node head = new Node(node.val, new ArrayList<>());
 
-        maps.put(node, newHead);
+        map.put(node, head);
         queue.add(node);
 
         while (!queue.isEmpty()) {
-            Node currNode = queue.poll();
-            for (Node neighbor : currNode.neighbors) {
-                if (!maps.containsKey(neighbor)) {
+            Node cur = queue.poll();
+            for (Node neighbor : cur.neighbors) {
+                if (!map.containsKey(neighbor)) {
                     Node clonedNode = new Node(neighbor.val, new ArrayList<>());
-                    maps.put(neighbor, clonedNode);
-                    maps.get(currNode).neighbors.add(clonedNode);
+                    map.put(neighbor, clonedNode);
                     queue.add(neighbor);
-                } else {
-                    maps.get(currNode).neighbors.add(maps.get(neighbor));
                 }
+                map.get(cur).neighbors.add(map.get(neighbor));
+
             }
         }
 
-        return newHead;
+        return head;
     }
 
 

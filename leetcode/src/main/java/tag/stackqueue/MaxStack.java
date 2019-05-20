@@ -16,20 +16,18 @@ public class MaxStack {
 
     public void push(int x) {
         stack.push(x);
-
-        if (max.isEmpty()) {
-            max.push(x);
-        } else if (x > max.peek()) {
-            max.push(x);
-        } else {
-            max.push(max.peek());
+        
+        if (max.isEmpty() || max.peek() <= x) {
+            max.push(x);                
         }
     }
 
     public int pop() {
         int top = stack.pop();
-        max.pop();
-
+        
+        if (top == max.peek()) {
+            max.pop();    
+        }
         return top;
     }
 

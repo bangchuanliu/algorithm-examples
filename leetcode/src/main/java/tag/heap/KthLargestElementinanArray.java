@@ -26,13 +26,12 @@ public class KthLargestElementinanArray {
     public int findKthLargest2(int[] nums, int k) {
         int i = 0;
         int j = nums.length - 1;
-        int offset = k - 1;
         while (i <= j) {
             int index = partition(nums, i, j);
 
-            if (index == offset) {
+            if (index == k - 1) {
                 return nums[index];
-            } else if (index > offset) {
+            } else if (index > k - 1) {
                 j = index - 1;
             } else {
                 i = index + 1;
@@ -45,6 +44,17 @@ public class KthLargestElementinanArray {
 
 
     public int partition(int[] nums, int low,  int high) {
+        /**
+         *generate pivot randomly
+         * 
+        Random ran = new Random();
+        int index = low + ran.nextInt(high - low+1);
+        int pivot = nums[index];
+        int val = nums[high];
+        nums[high] = pivot;
+        nums[index] = val;
+         */
+        
         int pivot = nums[high];
 
         int i = low;

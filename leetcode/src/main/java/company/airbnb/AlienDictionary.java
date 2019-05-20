@@ -5,67 +5,61 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 
 public class AlienDictionary {
 
     public static String alienOrder(String[] words) {
-        String result = "";
-        Map<Character, Integer> degrees = new HashMap<>();
-        for (String str : words) {
-            for (Character ch : str.toCharArray()) {
-                degrees.put(ch, 0);
+        Map<Character, Integer> degree = new HashMap<>();
+        Map<Character, List<Character>> g = new HashMap<>();
+
+        for (String word : words) {
+            for (char c : word.toCharArray()) {
+                degree.put(c, 0);
             }
         }
 
-        List<String> pairs = new ArrayList<>();
-        preprocess(words, pairs);
-
-        for (String str : pairs) {
-            Integer degree = degrees.get(str.charAt(1));
-            degrees.put(str.charAt(1), degree + 1);
-        }
-        
-        LinkedList<Character> letters = new LinkedList<>();
-        for (Character ch : degrees.keySet()) {
-            if (degrees.get(ch) == 0) {
-                letters.add(ch);
-            }
-        }
-
-        while (!letters.isEmpty()) {
-            Character ch = letters.poll();
-            result += ch;
-            for (String str : pairs) {
-                if (str.charAt(0) == ch) {
-                    Integer degree = degrees.get(str.charAt(1));
-                    degree--;
-                    if (degree == 0) {
-                        letters.add(str.charAt(1));
-                    } else {
-                        degrees.put(str.charAt(1), degree);
-                    }
-                }
-            }
-        }
-
-        return result.length() == degrees.size() ? result : "";
-    }
-
-    public static void preprocess(String[] words, List<String> pairs) {
         for (int i = 0; i < words.length - 1; i++) {
-            String word1 = words[i];
-            String word2 = words[i + 1];
-            int m = 0;
-            int n = 0;
-            while (m < word1.length() && n < word2.length()) {
-                if (word1.charAt(m) != word2.charAt(n)) {
-                    pairs.add(String.valueOf(word1.charAt(m)) + String.valueOf(word2.charAt(n)));
-                    break;
-                }
-                m++;
-                n++;
+            String s1 = words[i];
+            String s2 = words[i + 1];
+
+            int j = 0;
+            int len = Math.min(s1.length(), s2.length());
+            while (j < len && s1.charAt(j) == s2.charAt(j)) {
+                j++;
+            }
+            if (j < len) {
+                List<Character> list = g.getOrDefault(s1.charAt(j), new ArrayList<>());
+                list.add(s2.charAt(j));
+                g.put(s1.charAt(j), list);
+                degree.put(s2.charAt(j), degree.getOrDefault(s2.charAt(j), 0) + 1);
             }
         }
+        StringBuilder sb = new StringBuilder();
+        Queue<Character> q = new LinkedList<>();
+        for (char c : degree.keySet()) {
+            if (degree.get(c) == 0) {
+                q.add(c);
+            }
+        }
+
+        while (!q.isEmpty()) {
+            char cur = q.poll();
+            sb.append(cur);
+            if (g.get(cur) != null) {
+                for (char c : g.get(cur)) {
+                    int d = degree.get(c);
+                    d--;
+                    if (d == 0) {
+                        q.add(c);
+                    }
+                    degree.put(c, d);
+                }
+            }
+
+        }
+
+        return sb.length() == degree.size() ? sb.toString() : "";
     }
 
     public static void main(String[] args) {

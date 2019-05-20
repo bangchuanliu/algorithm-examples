@@ -8,14 +8,12 @@ public class PathSum {
         if (root == null) {
             return false;
         }
-        
-        sum -= root.val;
-        
-        if (root.left == null && root.right == null) {
-            return sum == 0;
+
+        if (sum == root.val && root.left == null && root.right == null) {
+            return true;
         }
 
-        return hasPathSum(root.left, sum) || hasPathSum(root.right, sum);
+        return hasPathSum(root.left, sum - root.val) || hasPathSum(root.right, sum - root.val);
     }
 
 }

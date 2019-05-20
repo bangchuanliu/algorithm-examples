@@ -1,51 +1,56 @@
 package other;
 
-import java.math.BigInteger;
-import java.util.PriorityQueue;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Util {
 
     public static void main(String[] args) {
-
-        PriorityQueue<Integer> q = new PriorityQueue<>();
-        BigInteger id = BigInteger.valueOf(13866763745L).shiftLeft(23);
-        id = id.or(BigInteger.valueOf(1341 <<(64-41-13)));
+        Util util = new Util();
         
-        System.out.println(id);
+        System.out.println(util.oneValidString("())"));
+        
+        System.out.println(System.currentTimeMillis());
 
-        System.out.println(2 << 10);
+        AtomicInteger atomicInteger = new AtomicInteger(0);
+        System.out.println(atomicInteger.incrementAndGet());
+        System.out.println(atomicInteger.incrementAndGet());
+
     }
-
-    static int minimumDistance(String[] array, String word1, String word2) {
-
-        int s = -1;
-        int e = -1;
-
-        int r = array.length;
-        boolean isSame = false;
-        if (word1.equals(word2)) {
-            isSame = true;
-        }
-
-        for (int i = 0; i < array.length; i++) {
-
-            if (isSame && array[i].equals(word1)) {
-                if (s != -1) {
-                    r = Math.min(r, Math.abs(s-i));
-                }
-                s = i;
-            } else {
-                if (array[i].equals(word1)) {
-                    s = i;
-                } else if (array[i].equals(word2)) {
-                    e = i;
-                }
-                if (s != -1 && e != -1) {
-                    r = Math.min(r, Math.abs(s-e));
+    
+    
+    public String oneValidString(String s) {
+        int left = 0;
+        int right = 0;
+        StringBuilder sb = new StringBuilder();
+        
+        for (char c : s.toCharArray()) {
+            if (c == '(') {
+                left++;
+                sb.append(c);
+            }else if (c == ')') {
+                if (left > 0) {
+                    left--;
+                    sb.append(c);
                 }
             }
         }
-        return r;
+        
+        
+        for (int i = sb.length() - 1; i >= 0; i--) {
+            if (sb.charAt(i) == ')') {
+                right++;
+            }else if (sb.charAt(i) == '(') {
+                if (right == 0) {
+                    sb.deleteCharAt(i);
+                }else {
+                    right--;
+                }
+            }
+        }
+        
+        return sb.toString();
+        
     }
 }
+
 

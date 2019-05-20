@@ -10,16 +10,17 @@ public class AddandSearchWord {
 
     // Adds a word into the data structure.
     public void addWord(String word) {
-        TrieNode curr = root;
+        TrieNode cur = root;
 
-        for (int i = 0; i < word.length(); i++) {
-            if (!curr.children.containsKey(word.charAt(i))) {
-                TrieNode node = new TrieNode(word.charAt(i));
-                curr.children.put(word.charAt(i), node);
+        for (char c : word.toCharArray()) {
+            if (!cur.children.containsKey(c)) {
+                TrieNode node = new TrieNode(c);
+                cur.children.put(c, node);
             }
-            curr = curr.children.get(word.charAt(i));
+            cur = cur.children.get(c);
         }
-        curr.isLeaf = true;
+
+        cur.isLeaf = true;
     }
 
     // Returns if the word is in the data structure. A word could
@@ -29,20 +30,17 @@ public class AddandSearchWord {
         return search(word, root);
     }
 
-    public boolean search(String word, TrieNode root) {
-        if (root == null) {
-            return false;
-        }
-
+    public boolean search(String word, TrieNode node) {
         if (word.isEmpty()) {
-            return root.isLeaf;
+            return node.isLeaf;
         }
 
-        if (root.children.containsKey(word.charAt(0))) {
-            return search(word.substring(1), root.children.get(word.charAt(0)));
-        } else if (word.charAt(0) == '.') {
-            for (char c : root.children.keySet()) {
-                if (search(word.substring(1), root.children.get(c))) {
+        char c = word.charAt(0);
+        if (node.children.containsKey(c)) {
+            return search(word.substring(1), node.children.get(c));
+        }else if (c == '.') {
+            for (char ch : node.children.keySet()) {
+                if (search(word.substring(1), node.children.get(ch))) {
                     return true;
                 }
             }

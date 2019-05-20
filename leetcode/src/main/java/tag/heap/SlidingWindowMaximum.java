@@ -1,25 +1,62 @@
 package tag.heap;
 
+import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Deque;
 import java.util.PriorityQueue;
 
 public class SlidingWindowMaximum {
 
-	public int[] maxSlidingWindow(int[] nums, int k) {
 
+    /**
+     * Deque
+     *
+     */
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        if (nums == null || nums.length == 0 || k < 0) {
+            return new int[0];
+        }
+
+        int[] arr = new int[nums.length - k + 1];
+        Deque<Integer> q = new ArrayDeque<>();
+
+        for (int i = 0; i < k; i++) {
+            if (!q.isEmpty()) {
+                while (!q.isEmpty() && nums[q.getLast()] < nums[i]) {
+                    q.removeLast();
+                }
+            }
+            q.add(i);
+        }
+        arr[0] = nums[q.getFirst()];
+        for (int i = k; i < nums.length; i++) {
+            if (!q.isEmpty() && q.getFirst() == i - k) {
+                q.removeFirst();
+            }
+            while (!q.isEmpty() && nums[q.getLast()] < nums[i]) {
+                q.removeLast();
+            }
+            q.add(i);
+            arr[i - k + 1] = nums[q.getFirst()];
+        }
+
+        return arr;
+    }
+
+
+    /**
+     * heap
+     * 
+     */
+	public int[] maxSlidingWindow2(int[] nums, int k) {
 		if (nums == null || nums.length == 0 || k < 0) {
 			return new int[0];
 		}
 
 		int[] arr = new int[nums.length - k + 1];
 
-		PriorityQueue<Integer> heap = new PriorityQueue<Integer>(k, new Comparator<Integer>() {
-			@Override
-			public int compare(Integer a, Integer b) {
-				return b - a;
-			}
-		});
+		PriorityQueue<Integer> heap = new PriorityQueue<>((a,b) -> b - a);
 
 		for (int i = 0; i < k; i++) {
 			heap.add(nums[i]);
@@ -29,7 +66,7 @@ public class SlidingWindowMaximum {
 
 		for (int i = k; i < nums.length; i++) {
 			heap.remove(nums[i - k]);
-			heap.offer(nums[i]);
+			heap.add(nums[i]);
 			arr[i - k + 1] = heap.peek();
 		}
 
