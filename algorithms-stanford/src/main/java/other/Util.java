@@ -1,5 +1,7 @@
 package other;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Util {
@@ -14,7 +16,8 @@ public class Util {
         AtomicInteger atomicInteger = new AtomicInteger(0);
         System.out.println(atomicInteger.incrementAndGet());
         System.out.println(atomicInteger.incrementAndGet());
-
+        Map<String, Integer> map = new HashMap<>();
+        System.out.println(map.get(null));
     }
     
     

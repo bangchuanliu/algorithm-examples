@@ -10,32 +10,27 @@ public class DecodeWays {
 		if (s.startsWith("0")) {
 			return 0;
 		}
-		
-		int[] ways = new int[s.length() + 1];
-		
-		ways[0] = 1;
-		ways[1] = 1;
-		
-		for (int i = 2; i <= s.length(); i++) {
-			if (isValid(s.substring(i-1,i))) {
-				ways[i] += ways[i-1];
+		if (s == null || s.length() == 0) {
+			return 0;
+		}
+
+		int[] dp = new int[s.length() + 1];
+		dp[0] = 1;
+		dp[1] = 1;
+
+		for (int i = 2; i < dp.length; i++) {
+			if (s.charAt(i-1) != '0') {
+				dp[i] += dp[i-1];
 			}
-			
-			if (isValid(s.substring(i-2,i))) {
-				ways[i] += ways[i-2];
+
+			if (s.charAt(i-2) != '0' && Integer.parseInt(s.substring(i-2,i)) <= 26) {
+				dp[i] += dp[i-2];
 			}
 		}
-		
-		return ways[s.length()];
+
+		return dp[dp.length-1];
 	}
-	
-	public boolean isValid(String str) {
-		if (str.charAt(0) == '0') {
-			return false;
-		}
-		
-		return Integer.parseInt(str) >= 1 && Integer.parseInt(str) <= 26;	
-	}
+
 
 	public static void main(String[] args) {
 		DecodeWays instance = new DecodeWays();

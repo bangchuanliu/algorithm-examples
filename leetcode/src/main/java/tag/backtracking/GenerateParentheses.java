@@ -4,39 +4,28 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * 
- * @author bangliu
- * 
- */
 public class GenerateParentheses {
 
 	public List<String> generateParenthesis(int n) {
-		List<String> parentheses = new ArrayList<>();
-		if (n <= 0) {
-			return parentheses;
-		}
+		List<String> result = new ArrayList<>();
+		generateParenthesis(result, "", n, n);
 
-		generateParenthesis(parentheses, n, n, "");
-		return parentheses;
+		return result;
 	}
 
-	public void generateParenthesis(List<String> parentheses, int left, int right, String s) {
-		if (left > right) {
+
+	public void generateParenthesis(List<String> result, String str, int l, int r) {
+		if (l < 0 || r < 0 || l > r) {
 			return;
 		}
 
-		if (left == 0 && right == 0) {
-			parentheses.add(s);
+		if (l == 0 && r == 0) {
+			result.add(str);
+			return;
 		}
 
-		if (left > 0) {
-			generateParenthesis(parentheses, left - 1, right, s + "(");
-		}
-
-		if (right > 0) {
-			generateParenthesis(parentheses, left, right - 1, s + ")");
-		}
+		generateParenthesis(result, str + '(', l-1,r);
+		generateParenthesis(result, str + ')', l,r-1);
 	}
 
 	public static void main(String[] args) {
