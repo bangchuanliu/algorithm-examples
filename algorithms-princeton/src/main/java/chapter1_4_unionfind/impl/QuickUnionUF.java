@@ -29,6 +29,7 @@ public class QuickUnionUF implements UF {
     @Override
     public int find(int p) {
         while (ids[p] != p) {
+            ids[p] = ids[ids[p]]; //flat tree
             p = ids[p];
         }
         return p;

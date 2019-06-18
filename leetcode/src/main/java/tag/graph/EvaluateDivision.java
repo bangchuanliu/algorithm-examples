@@ -3,8 +3,10 @@ package tag.graph;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class EvaluateDivision {
 
@@ -24,18 +26,17 @@ public class EvaluateDivision {
         double[] ret = new double[queries.length];
         Arrays.fill(ret, -1.0);
         for (int i = 0; i < queries.length; i++) {
-            Map<String, Boolean> marked = new HashMap<>();
             if (!graph.containsKey(queries[i][0]) || !graph.containsKey(queries[i][1])) {
                 ret[i] = -1.0;
             } else {
-                search(graph, queries[i][0], queries[i][1], 1.0, ret, i, marked);
+                search(graph, queries[i][0], queries[i][1], 1.0, ret, i, new HashSet<>());
             }
         }
 
         return ret;
     }
 
-    public void search(Map<String, List<Edge>> graph, String start, String end, double prod, double[] ret, int i, Map<String, Boolean> marked) {
+    public void search(Map<String, List<Edge>> graph, String start, String end, double prod, double[] ret, int i, Set<String> marked) {
         if (start.equals(end)) {
             ret[i] = prod;
             return;
@@ -43,8 +44,8 @@ public class EvaluateDivision {
         List<Edge> list = graph.get(start);
 
         for (Edge edge : list) {
-            if (!marked.getOrDefault(edge.val, false)) {
-                marked.put(edge.val, true);
+            if (!marked.contains(edge.val)) {
+                marked.add(edge.val);
                 search(graph, edge.val, end, prod * edge.weight, ret, i, marked);
             }
         }

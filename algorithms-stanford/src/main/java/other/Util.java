@@ -1,58 +1,26 @@
 package other;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
+import javax.xml.bind.DatatypeConverter;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 
 public class Util {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws UnsupportedEncodingException {
         Util util = new Util();
         
-        System.out.println(util.oneValidString("())"));
+        String str = "中";
         
-        System.out.println(System.currentTimeMillis());
+        this.getClass().isLocalClass()
+        
+        byte[] bytes = str.getBytes(Charset.forName("UTF-8"));
+        byte[] bytes2 = str.getBytes(Charset.forName("ISO8859-1"));
 
-        AtomicInteger atomicInteger = new AtomicInteger(0);
-        System.out.println(atomicInteger.incrementAndGet());
-        System.out.println(atomicInteger.incrementAndGet());
-        Map<String, Integer> map = new HashMap<>();
-        System.out.println(map.get(null));
-    }
-    
-    
-    public String oneValidString(String s) {
-        int left = 0;
-        int right = 0;
-        StringBuilder sb = new StringBuilder();
-        
-        for (char c : s.toCharArray()) {
-            if (c == '(') {
-                left++;
-                sb.append(c);
-            }else if (c == ')') {
-                if (left > 0) {
-                    left--;
-                    sb.append(c);
-                }
-            }
-        }
-        
-        
-        for (int i = sb.length() - 1; i >= 0; i--) {
-            if (sb.charAt(i) == ')') {
-                right++;
-            }else if (sb.charAt(i) == '(') {
-                if (right == 0) {
-                    sb.deleteCharAt(i);
-                }else {
-                    right--;
-                }
-            }
-        }
-        
-        return sb.toString();
-        
+        System.out.println(DatatypeConverter.printHexBinary(bytes2));
+        System.out.println(new String(new byte[]{(byte)0x3f}, "ISO-8859-1"));
+
+        String item = new String(new byte[] { (byte) 0xe4, (byte) 0xb8, (byte) 0xad }, "ISO-8859-1");
+        System.out.println(item);
     }
 }
 
