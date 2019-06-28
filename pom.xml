@@ -12,6 +12,7 @@
         <module>algorithms-stanford</module>
         <module>leetcode</module>
         <module>algorithms-princeton</module>
+        <module>interview-questions</module>
     </modules>
 
     <build>
