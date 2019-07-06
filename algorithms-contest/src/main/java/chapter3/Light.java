@@ -9,9 +9,10 @@ public class Light {
     public static List<Integer> switchLight(boolean[] lights, int k) {
         if (k <= 0) {
             return new ArrayList<>();
-        }
+        } 
+        
         for (int i = 1; i <= k; i++) {
-            for (int j = i; j < lights.length; j = j+i) {
+            for (int j = i ; j < lights.length; j = j+ i) {
                 lights[j] = !lights[j];
             }
         }
