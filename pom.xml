@@ -13,7 +13,7 @@
         <module>leetcode</module>
         <module>algorithms-princeton</module>
         <module>interview-questions</module>
-        <module>algorithm-contest</module>
+        <module>algorithms-contest</module>
     </modules>
 
     <build>
