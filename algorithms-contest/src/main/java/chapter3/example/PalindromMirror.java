@@ -1,4 +1,4 @@
-package chapter3;
+package chapter3.example;
 
 public class PalindromMirror {
     
@@ -24,6 +24,8 @@ public class PalindromMirror {
             if (s.charAt(pos) != input.charAt(j)) {
                 isMirror = 0;
             }
+            
+            if (isPalindrom == 0 && isMirror == 0) break;
             i++;
             j--;
         }

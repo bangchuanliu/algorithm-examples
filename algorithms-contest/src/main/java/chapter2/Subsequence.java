@@ -2,7 +2,7 @@ package chapter2;
 
 import java.math.BigDecimal;
 
-public class SumOfSubsequence {
+public class Subsequence {
 
     public static BigDecimal sum(int n, int m) {
         double sum = 0;

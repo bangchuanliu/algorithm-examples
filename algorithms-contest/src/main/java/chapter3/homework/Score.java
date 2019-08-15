@@ -1,6 +1,6 @@
-package chapter3;
+package chapter3.homework;
 
-public class StringScore {
+public class Score {
     
     
     public static int score(String input) {

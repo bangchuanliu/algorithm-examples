@@ -1,4 +1,4 @@
-package chapter3;
+package chapter3.example;
 
 public class WRTYU {
     public static String wertyu(String input) {

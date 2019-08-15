@@ -1,9 +1,8 @@
-package chapter3;
+package chapter3.example;
 
 public class VerticalFormula {
 
     public static int printFormula(String input) {
-        
         int count = 0;
         
         for (int i = 100; i < 1000; i++) {
@@ -13,7 +12,6 @@ public class VerticalFormula {
                 int z = i * j;
                 
                 String str = i + "" + j + "" + x + "" + y + "" + z;
-                
                 boolean flag = true;
                 
                 for(char c : str.toCharArray()) {
@@ -24,7 +22,7 @@ public class VerticalFormula {
                 
                 if (flag) {
                     count++;
-                    System.out.println(i + "\n" + j + "\n" + x + "\n" + y + "\n" + z);
+                    System.out.println(String.format("%5d\nX%4d\n-----\n%5d\n%4d\n-----\n%5d\n\n", i, j, x, y, z));
                 }
             }
         }
@@ -33,7 +31,7 @@ public class VerticalFormula {
     }
     
     public static void main(String[] args) {
-        System.out.println(printFormula("13578"));
+        System.out.println(printFormula("2357"));
     }
     
 }

@@ -1,18 +1,19 @@
-package chapter3;
+package chapter3.example;
 
 import java.util.Arrays;
 
-public class SnakeSquare {
+public class SnakeRectangle {
 
-    public static void generateSnakeSquare(int[][] grid) {
+    public static void generateSnakeRectangle(int[][] grid) {
         int x = 0;
-        int y = grid.length - 1;
+        int y = grid[0].length - 1;
         int m = grid.length;
+        int n = grid[0].length;
 
         int count = 1;
         grid[x][y] = count;
 
-        while (count < m * m) {
+        while (count < m * n) {
             while (x+1 < m && grid[x+1][y] == 0) {
                 grid[++x][y] = ++count;
             }
@@ -25,7 +26,7 @@ public class SnakeSquare {
                 grid[--x][y] = ++count;
             }
 
-            while (y+1 < m &&  grid[x][y+1] == 0) {
+            while (y+1 < n &&  grid[x][y+1] == 0) {
                 grid[x][++y] = ++count;
             }
         }
@@ -33,20 +34,17 @@ public class SnakeSquare {
 
 
     public static void main(String[] args) {
-        int[][] grid = new int[3][3];
-        generateSnakeSquare(grid);
+        int[][] grid = new int[1][3];
+        generateSnakeRectangle(grid);
         System.out.println(Arrays.deepToString(grid));
 
-        grid = new int[2][2];
-        generateSnakeSquare(grid);
+
+        grid = new int[2][3];
+        generateSnakeRectangle(grid);
         System.out.println(Arrays.deepToString(grid));
 
-        grid = new int[1][1];
-        generateSnakeSquare(grid);
-        System.out.println(Arrays.deepToString(grid));
-
-        grid = new int[4][4];
-        generateSnakeSquare(grid);
+        grid = new int[3][3];
+        generateSnakeRectangle(grid);
         System.out.println(Arrays.deepToString(grid));
     }
 }

@@ -1,10 +1,9 @@
-package chapter3;
+package chapter3.homework;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class sixrectangularpalletsBox {
+public class SixrectangularpalletsBox {
     
     public static boolean isBox(int[][] grid) {
         
