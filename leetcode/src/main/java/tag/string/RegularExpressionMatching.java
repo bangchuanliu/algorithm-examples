@@ -13,12 +13,10 @@ public class RegularExpressionMatching {
             } else {
                 return isMatch(s.substring(1), p.substring(1));
             }
+        } else if (p.length() > 1 && p.charAt(1) == '*') {
+            return isMatch(s, p.substring(2));
         } else {
-            if (p.length() > 1 && p.charAt(1) == '*') {
-                return isMatch(s, p.substring(2));
-            } else {
-                return false;
-            }
+            return false;
         }
     }
 

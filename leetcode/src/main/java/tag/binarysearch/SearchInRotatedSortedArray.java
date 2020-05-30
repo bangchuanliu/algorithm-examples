@@ -11,44 +11,9 @@ package tag.binarysearch;
  * 
  * @author bliu13 Jan 11, 2016
  */
-public class SearchinRotatedSortedArray {
+public class SearchInRotatedSortedArray {
 
 	public int search(int[] nums, int target) {
-		if (nums == null || nums.length == 0) {
-			return -1;
-		}
-
-		int left = 0;
-		int right = nums.length - 1;
-
-		while (left <= right) {
-		    // mid is right, compare mid and left
-			int mid = right - (right - left) / 2;
-	
-			if (nums[mid] == target) {
-				return mid;
-			}
-			
-			if (nums[left] < nums[mid]) {
-				if (target < nums[mid] && target >= nums[left]) {
-					right = mid - 1;
-				} else {
-					left = mid + 1;
-				}
-			} else {
-				if (nums[mid] < target && target <= nums[right]) {
-					left = mid + 1;
-				} else {
-					right = mid - 1;
-				}
-			}
-		}
-
-		return -1;
-	}
-
-    
-	public int search2(int[] nums, int target) {
 		if (nums == null || nums.length == 0) {
 			return -1;
 		}
@@ -57,14 +22,15 @@ public class SearchinRotatedSortedArray {
 		int j = nums.length - 1;
 
 		while (i <= j) {
-            // if mid is left, compare mid and right
+			// mid is possibly equal to left in this way of compute
+			// in case of two elements [3, 1], mid = (0 + 1) / 2
 			int mid = (j+i) / 2;
 
 			if (nums[mid] == target) {
 				return mid;
 			}
 
-			if (nums[mid] < nums[j]) {
+			if (nums[i] <= nums[mid]) { // need include nums[mid] == nums[left] case
 				if (target > nums[mid] && target <= nums[j]) {
 					i = mid + 1;
 				} else {

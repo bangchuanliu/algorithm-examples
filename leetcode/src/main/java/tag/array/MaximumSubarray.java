@@ -3,6 +3,29 @@ package tag.array;
 public class MaximumSubarray {
     
     public int maxSubArray(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return -1;
+        }
+
+        int maxSum = Integer.MIN_VALUE;
+
+        int sum = 0;
+
+        for (int num : nums) {
+            sum += num;
+
+            if (sum < num) {
+                sum = num;
+            }
+
+            maxSum = Math.max(maxSum, sum);
+        }
+
+        return maxSum;
+
+    }
+    
+    public int maxSubArray2(int[] nums) {
         int[] sums = new int[nums.length+1];
         
         for (int i = 0; i < nums.length; i++) {

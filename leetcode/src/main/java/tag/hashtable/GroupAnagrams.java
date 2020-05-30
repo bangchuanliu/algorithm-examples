@@ -24,7 +24,6 @@ public class GroupAnagrams {
             String newStr = new String(strChars);
             if (!map.containsKey(newStr)) {
                 map.put(newStr, new ArrayList<>());
-
             }
             map.get(newStr).add(str);
         }
@@ -47,7 +46,7 @@ public class GroupAnagrams {
 
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < 26; i++) {
-                sb.append('#');
+//                sb.append('#');
                 sb.append(count[i]);
             }
             String key = sb.toString();

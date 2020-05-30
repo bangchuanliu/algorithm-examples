@@ -3,48 +3,47 @@ package tag.array;
 public class MedianofTwoSortedArrays {
 
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
-        if (nums1.length > nums2.length) {
-            int[] temp = nums1;
-            nums1 = nums2;
-            nums2 = temp;
+        if (nums1 == null || nums2 == null) {
+            return 0.0;
         }
 
-        int imin = 0;
-        int imax = nums1.length;
-        int mid = (nums1.length + nums2.length + 1) / 2;
+        if (nums1.length > nums2.length) {
+            return findMedianSortedArrays(nums2, nums1);
+        }
 
-        while (imin <= imax) {
-            int imid = (imin + imax) / 2;
-            int jmid = mid - imid;
+        int x = nums1.length;
+        int y = nums2.length;
 
-            if (imid > imin && nums1[imid - 1] > nums2[jmid]) {
-                imax = imid - 1;
-            } else if (imid < imax && nums2[jmid - 1] > nums1[imid]) {
-                imin = imid + 1;
+        int low = 0;
+        int high = x;
+
+        while (low <= high) {
+            int midx = (low + high) / 2;
+            int midy = (x + y + 1) / 2 - midx;
+
+            int maxLeftx = midx == 0 ? Integer.MIN_VALUE : nums1[midx - 1];
+            int minRightx = midx == x ? Integer.MAX_VALUE : nums1[midx];
+
+            int maxLefty = midy == 0 ? Integer.MIN_VALUE : nums2[midy - 1];
+            int minRighty = midy == y ? Integer.MAX_VALUE : nums2[midy];
+
+
+            if (maxLeftx <= minRighty && maxLefty <= minRightx) {
+                if ((x + y) % 2 == 0) {
+                    int left = Math.max(maxLeftx, maxLefty);
+                    int right = Math.min(minRightx, minRighty);
+
+                    return (double) (left + right) / 2;
+                } else {
+                    return Math.max(maxLeftx, maxLefty);
+                }
+            } else if (maxLeftx > minRighty) {
+                high = midx - 1;
             } else {
-                int maxLeft = 0;
-                if (imid == 0) {    
-                    maxLeft = nums2[jmid - 1];
-                } else if (jmid == 0) {
-                    maxLeft = nums1[imid - 1];
-                } else {
-                    maxLeft = Math.max(nums1[imid - 1], nums2[jmid - 1]);
-                }
-                if ((nums1.length + nums2.length) % 2 == 1) {
-                    return maxLeft;
-                }
-                int minRight = 0;
-                if (imid == nums1.length) {
-                    minRight = nums2[jmid];
-                } else if (jmid == nums2.length) {
-                    minRight = nums1[imid];
-                } else {
-                    minRight = Math.min(nums1[imid], nums2[jmid]);
-                }
-                return (maxLeft + minRight) / 2.0;
+                low = midx + 1;
             }
         }
 
-        return 0;
+        return 0.0;
     }
 }
