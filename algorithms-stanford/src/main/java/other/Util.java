@@ -1,8 +1,6 @@
 package other;
 
-import javax.xml.bind.DatatypeConverter;
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
 
 public class Util {
 

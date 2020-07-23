@@ -14,6 +14,7 @@
         <module>algorithms-princeton</module>
         <module>interview-questions</module>
         <module>algorithms-contest</module>
+        <module>algorithm-hackrank</module>
     </modules>
 
     <build>
