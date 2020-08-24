@@ -15,6 +15,7 @@
         <module>interview-questions</module>
         <module>algorithms-contest</module>
         <module>algorithm-hackrank</module>
+        <module>algotithm-perls</module>
     </modules>
 
     <build>

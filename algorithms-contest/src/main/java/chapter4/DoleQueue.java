@@ -1,4 +1,4 @@
-package chapter4.example;
+package chapter4;
 
 public class DoleQueue {
 
