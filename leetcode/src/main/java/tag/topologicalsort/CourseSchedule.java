@@ -88,10 +88,11 @@ public class CourseSchedule {
 		for (int i = 0; i < prerequisites.length; i++) {
 			if (prerequisites[i][1] == vetex) {
 				degrees[prerequisites[i][0]]--;
-				if (degrees[prerequisites[i][0]] == 0) {
-					vetexs.add(prerequisites[i][0]);
-					canFinish(prerequisites, degrees, vetexs, prerequisites[i][0]);
-				}
+				canFinish(prerequisites, degrees, vetexs, prerequisites[i][0]);
+//				if (degrees[prerequisites[i][0]] == 0) {
+//					vetexs.add(prerequisites[i][0]);
+//					
+//				}
 			}
 		}
 	}
@@ -101,6 +102,6 @@ public class CourseSchedule {
 		int[][] prerequisites = {{1,0}};
 		
 		CourseSchedule instance = new CourseSchedule();
-		instance.canFinish2(numCourses, prerequisites);
+		System.out.println(instance.canFinish2(numCourses, prerequisites));
 	}
 }

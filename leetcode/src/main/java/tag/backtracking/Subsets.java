@@ -8,12 +8,12 @@ public class Subsets {
 
 	public List<List<Integer>> generateSubsets(int[] nums) {
 		List<List<Integer>> result = new ArrayList<>();
-		generateSubsets(result, 0, nums, new ArrayList<>());
+		generateSubsets2(result, 0, nums, new ArrayList<>());
 		return result;
 	}
 
 	/**
-	 * bit manipulation
+	 * bit vector
 	 */
 	public void generateSubsets(List<List<Integer>> result, int index, int[] nums, List<Integer> temp) {
 		if (index == nums.length) {
@@ -41,6 +41,28 @@ public class Subsets {
 			temp.remove(temp.size() - 1);
 		}
 	}
+
+	// use array to store each combination
+	public static void subset(int[] nums, List<List<Integer>> result, Integer[] temp, int index, int cur) {
+		result.add(new ArrayList<>(Arrays.asList(Arrays.copyOfRange(temp, 0, cur))));
+
+		for (int i = index; i < nums.length; i++) {
+			temp[cur] = nums[i];
+			subset(nums, result, temp, i + 1, cur + 1);
+		}
+	}
+
+	// use array to store each combination
+	public static void subset2(int[] nums, List<List<Integer>> result, Integer[] temp, int index, int cur) {
+		if (index == nums.length) {
+			result.add(new ArrayList<>(Arrays.asList(Arrays.copyOfRange(temp, 0, cur))));
+		}
+
+		subset(nums, result, temp, index + 1, cur);
+		temp[cur] = nums[index];
+		subset(nums, result, temp, index + 1, cur + 1);
+	}
+	
 
 	public static void main(String[] args) {
 		int[] nums = {1,2,3};

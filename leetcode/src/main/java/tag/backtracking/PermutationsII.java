@@ -23,7 +23,6 @@ public class PermutationsII {
 	}
 
 	public void permute(List<List<Integer>> result, boolean[] used, int[] nums, List<Integer> temp) {
-
 		if (temp.size() == nums.length) {
 			result.add(new ArrayList<>(temp));
 			return;
@@ -39,6 +38,25 @@ public class PermutationsII {
 				permute(result, used, nums, temp);
 				temp.remove(temp.size() - 1);
 				used[i] = false;
+			}
+		}
+	}
+
+	public static void perm(int[] nums, boolean[] vis, List<List<Integer>> result, Integer[] temp, int index) {
+		if (index == nums.length) {
+			result.add(new ArrayList(Arrays.asList(temp)));
+			return;
+		}
+
+		int pre = -1;
+
+		for (int i = 0; i < nums.length; i++) {
+			if (nums[i] != pre && !vis[i]) {
+				vis[i] = true;
+				pre = nums[i];
+				temp[index] = nums[i];
+				perm(nums, vis, result, temp, index + 1);
+				vis[i] = false;
 			}
 		}
 	}
