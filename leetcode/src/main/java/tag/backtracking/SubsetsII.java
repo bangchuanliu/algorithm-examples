@@ -33,6 +33,20 @@ public class SubsetsII {
         }
     }
 
+    public void subsets(int[] nums, List<List<Integer>> result, Integer[] temp, int index, int cur) {
+        result.add(new ArrayList(Arrays.asList(Arrays.copyOfRange(temp, 0, cur))));
+
+        int pre = Integer.MIN_VALUE;
+
+        for (int i = index; i < nums.length; i++) {
+            if (pre != nums[i]) {
+                pre = nums[i];
+                temp[cur] = nums[i];
+                subsets(nums, result, temp, i + 1, cur + 1);
+            }
+        }
+    }
+
     public static void main(String[] args) {
         int[] nums = {2, 1, 2};
         SubsetsII instance = new SubsetsII();
