@@ -9,15 +9,10 @@ import java.util.stream.Stream;
 public class SerializeandDeserializeBST {
     public String serialize(TreeNode root) {
         if (root == null) {
-            return null;
+            return "";
         }
-        String result = "";
-        result = root.val + "";
-        String left = serialize(root.left);
-        String right = serialize(root.right);
-        result = left == null ? result : result + " " + left;
-        result = right == null ? result : result + " " +right;
-        return result;
+
+        return root.val + "," + serialize(root.left) + serialize(root.right);
     }
 
     // Decodes your encoded data to tree.
