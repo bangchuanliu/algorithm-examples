@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class FindAllDuplicatesinanArray {
+public class FindAllDuplicatesInanArray {
     
     public List<Integer> findDuplicates(int[] nums) {
         List<Integer> result = new ArrayList<>();
@@ -21,7 +21,7 @@ public class FindAllDuplicatesinanArray {
     }
     
     public static void main(String[] args) {
-        FindAllDuplicatesinanArray findAllDuplicatesinanArray = new FindAllDuplicatesinanArray();
+        FindAllDuplicatesInanArray findAllDuplicatesinanArray = new FindAllDuplicatesInanArray();
         int[] nums = {4,3,2,7,8,2,3,1};
         System.out.println(Arrays.toString(findAllDuplicatesinanArray.findDuplicates(nums).toArray()));
     }

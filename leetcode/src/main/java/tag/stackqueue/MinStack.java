@@ -4,32 +4,33 @@ import java.util.Stack;
 
 
 class MinStack {
-
-    private Stack<Integer> stack = new Stack();
-    private Stack<Integer> minStack = new Stack();
+    
+    private Stack<int[]> s = new Stack<>();
 
     public void push(int x) {
-        stack.push(x);
-        if (minStack.isEmpty() || x <= minStack.peek()) {
-            minStack.push(x);
+        if (s.isEmpty()) {
+            s.push(new int[] {x, x,});
+        }
+        
+        if (x < s.peek()[1]) {
+            s.push(new int[] {x, x});
+        } else {
+            s.push(new int[] {x, s.peek()[1]});
         }
     }
 
     public void pop() {
-        if (!stack.isEmpty()) {
-            int top = stack.pop();
-            if (top == minStack.peek()) {
-                minStack.pop();
-            }
+        if (!s.isEmpty()) {
+            s.pop();
         }
     }
 
     public int top() {
-        return stack.isEmpty() ? 0 : stack.peek();
+        return s.isEmpty() ? 0 : s.peek()[0];
     }
 
     public int getMin() {
-        return minStack.isEmpty() ? 0 : minStack.peek();
+        return s.isEmpty() ? 0 : s.peek()[1];
     }
 
     public static void main(String[] args) {
