@@ -8,35 +8,26 @@ import java.util.Map;
 
 public class PartitionLabels {
 
-    public List<Integer> partitionLabels(String S) {
-        Map<Character, Integer> map = new HashMap<>();
+    public List<Integer> partitionLabels(String s) {
+        Map<Character, Integer> indexMap = new HashMap<>();
         List<Integer> result = new ArrayList<>();
-        for (int i = 0; i < S.length(); i++) {
-            map.put(S.charAt(i), map.getOrDefault(S.charAt(i), 0) + 1);
+        for (int i = 0; i < s.length(); i++) {
+            indexMap.put(s.charAt(i), i);
         }
 
-        int i = 0;
         int j = 0;
-        int k = i;
-        while (j < S.length()) {
-            int num = map.get(S.charAt(j));
-            num--;
-            map.put(S.charAt(j), num);
-            if (num == 0) {
-                while (k < j && map.get(S.charAt(k)) == 0) {
-                    k++;
-                }
-                if (k == j) {
-                    result.add(j - i + 1);
-                    i = j+1;
-                    k = i;
-                }
+        while (j < s.length()) {
+            int i = j;
+            int index = j;
+            while (j <= index) {
+                index = Math.max(index, indexMap.get(s.charAt(j)));
+                j++;
             }
-            j++;
+            result.add(j - i);
         }
         return result;
     }
-    
+
     public static void main(String[] args) {
         PartitionLabels partitionLabels = new PartitionLabels();
         System.out.println(Arrays.toString(partitionLabels.partitionLabels("ababcbacadefegdehijhklij").toArray()));

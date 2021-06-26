@@ -6,38 +6,39 @@ import java.io.*;
  * Hello world!
  */
 public class ClosestNumber {
-    public static int closestNumber(int a, int b, int x) {
-//        long d = (int) Math.pow(a, b) + x / 2;
-//        return (int)(d - (d % x));
-        double c = Math.pow(a, b);
-        int high = (int)Math.ceil(c / x) * x;
-        int low = (int)Math.floor(c / x) * x;
-        
-        return (high - c < c - low) ? high : low;
-        
+    public String decodeString(String s) {
+        if (s == null || s.length() == 0) {
+            return "";
+        }
+
+        return decode(s);
+    }
+
+    static int index = 0;
+
+    public String decode(String s) {
+        String ret = "";
+        while(index < s.length()) {
+            char c = s.charAt(index);
+            if (c >= '0' && c <= '9') {
+                int count = c - '0';
+                index = index + 2;
+                String ss = decode(s);
+                for (int i = 0; i < count; i++) {
+                    ret = ret + ss;
+                }
+            } else if (c == ']') {
+                return ret;
+            } else {
+                ret = ret + String.valueOf(c);
+            }
+            index++;
+        }
+        return ret;
     }
 
 
     public static void main(String[] args) throws IOException {
-//        String file = ClosestNumber.class.getClassLoader().getResource("1").getFile();
-//        BufferedReader bufferedWriter = new BufferedReader(new FileReader(new File(file)));
-//
-//        String line = "";
-//        
-//        while ((line = bufferedWriter.readLine()) != null) {
-//            int a = Integer.parseInt(line.split(" ")[0]);
-//            int b = Integer.parseInt(line.split(" ")[1]);
-//            int x = Integer.parseInt(line.split(" ")[2]);
-//            System.out.println(closestNumber(a, b, x));
-//        }
-        
-
-
-
-        
-        System.out.println(closestNumber(653379374, 1, 3));
-//        System.out.println(closestNumber(395, 1, 7));
-//        System.out.println(closestNumber(4, -2, 2));
-//        System.out.println(closestNumber(717, -1, 264095061));
+        System.out.println(new ClosestNumber().decodeString("3[a2[c]]"));
     }
 }

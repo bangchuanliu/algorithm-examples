@@ -24,7 +24,7 @@ public class DecodeString {
             if (Character.isLetter(c)) str += c;
             else if (Character.isDigit(c)) num = num * 10 + c - '0';
             else if (c == ']') {
-                break;
+                return str;
             } else {
                 String sub = decode(q);
                 for (int i = 0; i < num; i++) {
@@ -36,49 +36,33 @@ public class DecodeString {
 
         return str;
     }
-
-
+    static int index = 0;
+    // use global variable to store the index
     public String decodeString2(String s) {
-
         if (s == null || s.length() == 0) {
             return s;
         }
-
-        Stack<String> stack = new Stack<>();
-
+        String ret = "";
         int num = 0;
-        for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
-
+        while(index < s.length()) {
+            char c =  s.charAt(index);
             if (Character.isDigit(c)) {
                 num = num * 10 + c - '0';
             }else if (c == '[') {
-                stack.push(num+"");
-                stack.push(c+"");
-                num = 0;
-            }else if (c == ']') {
-                StringBuilder sb = new StringBuilder();
-                while (!stack.isEmpty() && !stack.peek().equals("[")) {
-                    sb.insert(0,stack.pop());
-                }
-                stack.pop();
-                int num2 = Integer.parseInt(stack.pop());
-                StringBuilder sb2 = new StringBuilder();
-                for (int j = 0; j < num2; j++) {
-                    sb2.append(sb.toString());
-                }
-                stack.push(sb2.toString());
-            }else {
-                stack.push(c+"");
+                index = index + 1;
+                String temp = decodeString2(s);
+              for (int i = 0; i < num; i++) {
+                  ret = ret + temp;
+              }
+              num = 0;
+            } else if(c == ']') {
+                return ret;
+            } else {
+                ret  = ret + c;
             }
+            index++;
         }
-        
-        StringBuilder sb2 = new StringBuilder();
-        while (!stack.isEmpty()) {
-            sb2.insert(0,stack.pop());
-        }
-
-        return sb2.toString();
+        return ret;
     }
     
     public static void main(String[] args) {

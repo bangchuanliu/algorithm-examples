@@ -2,10 +2,21 @@ package tag.binarysearch;
 
 import java.util.LinkedList;
 
-import common.TreeNode;
-import common.TreeNodeUtil;
 
-public class KthSmallestElementinaBST {
+class TreeNode {
+	public int val;
+	public int leftCount;
+	public TreeNode left;
+	public TreeNode right;
+
+	public TreeNode(int x) {
+		val = x;
+		left = null;
+		right = null;
+	}
+}
+
+public class KthSmallestElementInABST {
 
 	/**
 	 * in order traversal iterative
@@ -69,6 +80,28 @@ public class KthSmallestElementinaBST {
 		return getNumberOfNodes(node.left) + getNumberOfNodes(node.right) + 1;
 	}
 
+	public int k2(TreeNode root, int k) {
+		if(k == root.leftCount + 1) {
+			return root.val;
+		}else if(k < root.leftCount + 1) {
+			return k2(root.left, k);
+		} else {
+			return k2(root.right, k - root.leftCount -1);
+		}
+	}
+
+	public int addCount(TreeNode root) {
+		if(root == null) {
+			return 0;
+		}
+
+		int left = addCount(root.left);
+		int right = addCount(root.right);
+
+		root.leftCount = left;
+		return left + right + 1;
+	}
+
 	/**
 	 * in order traversal recursive
 	 *
@@ -105,9 +138,11 @@ public class KthSmallestElementinaBST {
 	}
 	
 	public static void main(String[] args) {
-        KthSmallestElementinaBST instance = new KthSmallestElementinaBST();
+        KthSmallestElementInABST instance = new KthSmallestElementInABST();
         Integer[] nums = {3,1,4,null,2};
-        TreeNode node = TreeNodeUtil.creatTree(nums);
-        System.out.println(instance.kthSmallest3(node,1));
+//        TreeNode node = TreeNodeUtil.creatTree(nums);
+//        System.out.println(instance.kthSmallest3(node,1));
 	} 
 }
+
+
