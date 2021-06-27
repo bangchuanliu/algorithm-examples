@@ -1,7 +1,7 @@
 package tag.tree;
 
 import common.TreeNode;
-import common.TreeNodeUtil;
+import common.TreeHelper;
 
 /**
  * Given a binary tree, determine if it is height-balanced.
@@ -66,7 +66,7 @@ public class BalancedBinaryTree {
 	public static void main(String[] args) {
 		BalancedBinaryTree balancedBinaryTree = new BalancedBinaryTree();
 		Integer[] nums = {1,2,2,3,null,null,3,4,null,null,4};
-		TreeNode node = TreeNodeUtil.creatTree(nums);
+		TreeNode node = TreeHelper.creatTree(nums);
         System.out.println(balancedBinaryTree.isBalanced2(node));
 	}
 }

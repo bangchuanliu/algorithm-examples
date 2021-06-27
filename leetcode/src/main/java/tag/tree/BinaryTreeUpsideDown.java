@@ -1,7 +1,7 @@
 package tag.tree;
 
 import common.TreeNode;
-import common.TreeNodeUtil;
+import common.TreeHelper;
 
 public class BinaryTreeUpsideDown {
 
@@ -70,6 +70,6 @@ public class BinaryTreeUpsideDown {
         n2.right = n5;
         BinaryTreeUpsideDown instance = new BinaryTreeUpsideDown();
         TreeNode root = instance.upsideDownBinaryTree(n1);
-        TreeNodeUtil.printTree(root);
+        TreeHelper.printTree(root);
     }
 }

@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 import common.TreeNode;
-import common.TreeNodeUtil;
+import common.TreeHelper;
 
 public class SerializeandDeserializeBinaryTree {
     // Encodes a tree to a single string.
@@ -61,6 +61,6 @@ public class SerializeandDeserializeBinaryTree {
         String serializedStr = instance.serialize(n1);
         System.out.println(serializedStr);
         TreeNode root = instance.deserialize(serializedStr);
-        TreeNodeUtil.printTree(root);
+        TreeHelper.printTree(root);
     }
 }

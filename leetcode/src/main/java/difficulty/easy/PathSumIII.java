@@ -1,7 +1,7 @@
 package difficulty.easy;
 
 import common.TreeNode;
-import common.TreeNodeUtil;
+import common.TreeHelper;
 
 public class PathSumIII {
 
@@ -33,7 +33,7 @@ public class PathSumIII {
 
     public static void main(String[] args) {
         Integer[] nums = {1, -2, -3, 1, 3, -2, null, -1};
-        TreeNode root = TreeNodeUtil.creatTree(nums);
+        TreeNode root = TreeHelper.creatTree(nums);
         PathSumIII pathSumIII = new PathSumIII();
         System.out.println(pathSumIII.pathSum(root, -1));
     }

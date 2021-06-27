@@ -1,7 +1,7 @@
 package tag.tree;
 
 import common.TreeNode;
-import common.TreeNodeUtil;
+import common.TreeHelper;
 
 public class RecoverBinarySearchTree {
     public void recoverTree(TreeNode root) {
@@ -48,6 +48,6 @@ public class RecoverBinarySearchTree {
         RecoverBinarySearchTree instance = new RecoverBinarySearchTree();
         instance.recoverTree(n3);
 //        TreeNodeUtil.printTree(n2);
-        TreeNodeUtil.PrintInorder(n3);
+        TreeHelper.PrintInorder(n3);
     }
 }

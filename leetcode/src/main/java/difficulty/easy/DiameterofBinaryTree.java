@@ -1,7 +1,7 @@
 package difficulty.easy;
 
 import common.TreeNode;
-import common.TreeNodeUtil;
+import common.TreeHelper;
 
 public class DiameterofBinaryTree {
 
@@ -27,7 +27,7 @@ public class DiameterofBinaryTree {
     public static void main(String[] args) {
         DiameterofBinaryTree diameterofBinaryTree = new DiameterofBinaryTree();
         Integer[] nums = {1, 2, 3, 4, 5};
-        TreeNode root = TreeNodeUtil.creatTree(nums);
+        TreeNode root = TreeHelper.creatTree(nums);
         System.out.println(diameterofBinaryTree.diameterOfBinaryTree(root));
     }
 }

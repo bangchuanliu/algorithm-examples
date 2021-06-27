@@ -1,12 +1,22 @@
 package tag.array;
 
 /**
- * 1. use hashmap to record num count
- * 2. use array to record num count, array index is num
- * 3. use one variable to record candidate
+ * 169. Majority Element
+ * <p>
+ * Given an array nums of size n, return the majority element.
+ * <p>
+ * The majority element is the element that appears more than ⌊n / 2⌋ times. You may assume that the majority element always exists in the array.
+ * <p>
+ * Input: nums = [3,2,3]
+ * Output: 3
+ * <p>
+ * Input: nums = [2,2,1,1,1,2,2]
+ * Output: 2
  */
 public class MajorityElement {
 
+    // The idea is that reduce number when there are different
+    // The majority would be left
     public static int majorityElement(int[] nums) {
         int count = 0;
         int n = 0;

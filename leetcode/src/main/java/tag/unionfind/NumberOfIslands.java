@@ -22,13 +22,7 @@ public class NumberOfIslands {
 		return count;
 	}
 	
-	/**
-	 * DFS merge
-	 * 
-	 * @param grid
-	 * @param i
-	 * @param j
-	 */
+	
 	public void merge(char[][] grid, int i, int j) {
 		if (i < 0 || i >= grid.length || j < 0 || j >= grid[0].length || grid[i][j] != '1') {
 			return;

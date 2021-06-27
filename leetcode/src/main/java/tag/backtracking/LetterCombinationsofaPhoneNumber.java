@@ -12,7 +12,6 @@ public class LetterCombinationsofaPhoneNumber {
 		List<String> result = new ArrayList<>();
 
 		Map<Character, String> digitsLetterMap = new HashMap<>();
-		digitsLetterMap.put('1', "");
 		digitsLetterMap.put('2', "abc");
 		digitsLetterMap.put('3', "def");
 		digitsLetterMap.put('4', "ghi");
@@ -22,22 +21,22 @@ public class LetterCombinationsofaPhoneNumber {
 		digitsLetterMap.put('8', "tuv");
 		digitsLetterMap.put('9', "wxyz");
 
-		letterCombinations(digits, result, digitsLetterMap, "", 0);
+		letterCombinations(digits, result, digitsLetterMap, "");
 
 		return result;
 	}
 
-	public void letterCombinations(String digits, List<String> result, Map<Character, String> maps, String temp, int index) {
-		if (index == digits.length()) {
+	public void letterCombinations(String digits, List<String> result, Map<Character, String> maps, String temp) {
+		if (temp.length() == digits.length()) {
 			result.add(temp);
 			return;
 		}
 
-		Character ch = digits.charAt(index);
+		Character ch = digits.charAt(temp.length());
 		String letters = maps.get(ch);
 
 		for (int i = 0; i < letters.length(); i++) {
-			letterCombinations(digits, result, maps, temp + letters.charAt(i), index+1);
+			letterCombinations(digits, result, maps, temp + letters.charAt(i));
 		}
 	}
 	

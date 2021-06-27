@@ -1,7 +1,7 @@
 package tag.tree;
 
 import common.TreeNode;
-import common.TreeNodeUtil;
+import common.TreeHelper;
 import difficulty.easy.BinaryTreeLevelOrderTraversal;
 
 import java.util.LinkedList;
@@ -65,7 +65,7 @@ public class CountUnivalueSubtrees {
     public static void main(String[] args) {
         CountUnivalueSubtrees countUnivalueSubtrees = new CountUnivalueSubtrees();
         Integer[] nums = {7, 82, 82, -79, 98, 98, -79, -79, null, -28, -24, -28, -24, null, -79, null, 97, 65, -4, null, 3, -4, 65, 3, null, 97};
-        TreeNode node = TreeNodeUtil.creatTree(nums);
+        TreeNode node = TreeHelper.creatTree(nums);
         TreeNode node2 = stringToTreeNode("[7,82,82,-79,98,98,-79,-79,null,-28,-24,-28,-24,null,-79,null,97,65,-4,null,3,-4,65,3,null,97]");
         BinaryTreeLevelOrderTraversal binaryTreeLevelOrderTraversal = new BinaryTreeLevelOrderTraversal();
         System.out.println(countUnivalueSubtrees.countUnivalSubtrees(node2));

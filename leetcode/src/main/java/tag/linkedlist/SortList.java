@@ -2,66 +2,59 @@ package tag.linkedlist;
 
 import common.ListNode;
 
+/**
+ * 148. Sort List
+ * 
+ * Given the head of a linked list, return the list after sorting it in ascending order.
+ *
+ * Follow up: Can you sort the linked list in O(n logn) time and O(1) memory (i.e. constant space)?
+ * 
+ * Input: head = [4,2,1,3]
+ * Output: [1,2,3,4]
+ * 
+ * Input: head = [-1,5,3,4,0]
+ * Output: [-1,0,3,4,5]
+ */
 public class SortList {
-	public ListNode sortList(ListNode head) {
+    public ListNode sortList(ListNode head) {
+        if (head == null || head.next == null) return head;
 
-		if (head == null || head.next == null) {
-			return head;
-		}
+        ListNode slow = head;
+        ListNode fast = head.next;
 
-		ListNode slow = head.next;
-		ListNode fast = head.next.next;
-		ListNode second = null;
-		
-		if (fast == null) {
-			second = slow;
-			head.next = null;
-		} else {
-			while (fast != null && fast.next != null) {
-				slow = slow.next;
-				fast = fast.next.next;
-			}
-			second = slow.next;
-			slow.next = null;
-		}
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
 
-		ListNode left = sortList(head);
-		ListNode right = sortList(second);
+        ListNode next = slow.next;
+        slow.next = null;
 
-		return mergeTwoLists(left, right);
-	}
+        ListNode left = sortList(head);
+        ListNode right = sortList(next);
 
-	public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-		if (l1 == null && l2 == null) {
-			return null;
-		}
-		if (l1 != null && l2 == null) {
-			return l1;
-		}
-		if (l1 == null && l2 != null) {
-			return l2;
-		}
-		ListNode p1 = l1;
-		ListNode p2 = l2;
-		ListNode l3 = new ListNode(0);// helper node
-		ListNode p = l3;
-		while (p1 != null && p2 != null) {
-			if (p1.val < p2.val) {
-				p.next = p1;
-				p = p1;
-				p1 = p1.next;
-			} else {
-				p.next = p2;
-				p = p2;
-				p2 = p2.next;
-			}
-		}
-		if (p1 != null) {
-			p.next = p1;
-		}
-		if (p2 != null) {
-			p.next = p2;
-		}
-		return l3.next;
-	}
+        return mergeTwoLists(left, right);
+    }
+
+    public ListNode mergeTwoLists(ListNode p1, ListNode p2) {
+        ListNode l3 = new ListNode(0);
+        ListNode p = l3;
+        while (p1 != null && p2 != null) {
+            if (p1.val < p2.val) {
+                p.next = p1;
+                p1 = p1.next;
+            } else {
+                p.next = p2;
+                p2 = p2.next;
+            }
+            p = p.next;
+        }
+        if (p1 != null) {
+            p.next = p1;
+        }
+        if (p2 != null) {
+            p.next = p2;
+        }
+        return l3.next;
+    }
 }
